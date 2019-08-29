@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl -w -I ./
 
 # yfktest - a simple, single operator ham radio contest logbook
 # 
@@ -41,6 +41,7 @@ if ($hashamlib) {
 our $hamlibsock; 									# initialized later, if needed.
 our $hamlibrigd;
 our $cwsocket;
+our $netsocket; #ON4ACP 190829 to broadcast QSO info
 
 our $netname = "STN1";									# will be overridden later by found path
 our $contestpath = "defs/";
@@ -104,6 +105,11 @@ our $cabrilloline='no cabrillo format defined!';					# printf-string for the cab
 our $cabrillovalues='band date utc ...';
 our $cabrilloname='CONTEST-NAME';
 
+our $submitname='';
+our $address1='';
+our $address2='';
+our $address3='';
+our $address4='';
 our ($exc1len, $exc2len, $exc3len, $exc4len) = (4,4,4,4);
 
 our $fixexchange='';									# fixed exchange like in IOTA, ITU etc.
@@ -111,6 +117,7 @@ our $fixexchange='';									# fixed exchange like in IOTA, ITU etc.
 our $fixexchangename='';								# what to ask the user for, like "IOTA-Ref:"?
 our $exc1s = '';									# actual value of the fixed exchange value
 our $exc2s = '';
+our $exc3s = '';
 
 our $tmp='';
 
@@ -118,7 +125,6 @@ our $counter=0;
 our $counter1=0;
 
 our $offset=1;# ON4ACP for consecutive dupes when not rescoring
-
 my $curpos = 0;
 
 our $lastguessed = '';									# For guessexchange-only consider every callsign once & saved
@@ -165,6 +171,11 @@ our ($defmult1, $defmult2, $defqsopts);
 our @qsos;										# Array of hashes with single QSOs.
 #our @net_qsos : shared;								# Array of hashes with single QSOs received over the net
 
+#ON4ACP 190829 Open netsocket to broadcast QSO info
+$netsocket = IO::Socket::INET->new(PeerAddr => "localhost",
+                PeerPort => "12060", Proto    => "udp", Type     => SOCK_DGRAM,)
+                or die "Cannot open socket for QSO broadcast.\n";
+
 our @cwmessages  = ('');
 our $showmsgkeys = 0;
 
@@ -184,13 +195,13 @@ our %qso = (										# The current QSO
 		'rst' => '599',
 		'excs' => '',								# sent exchange
 		'exc1' => '',
-		'exc2' => '59',
-		'exc3' => '59',
+		'exc2' => '',
+		'exc3' => '',
 		'exc4' => '',
-		'band' => '40',                                                         # ON4ACP default to 40 for in case you are RESTRICTED
+		'band' => '20',
 		'freq' => '',
-#		'mode' => 'CW',
-		'mode' => 'SSB',							# for testing $cqrepeat stuff
+		'mode' => 'CW',
+#		'mode' => 'SSB',							# for testing $cqrepeat stuff
 		'stn' => $netname ,
 		'ops' => ''
 );
@@ -400,6 +411,7 @@ if ($contest eq 'UBA-FD') {addstr($wmain, 8, 66, "$contest");}# ON4ACP moving wi
 my $oldband = $qso{'band'};								# used to insure cqrepeats are requested anew
 my $oldmode = $qso{'mode'};                                                             #    after band or mode changes
 my $oldtime = (time + $cqinterval);							# timer i.e. oldtime = (time + $cqinterval)
+$qso{'freq'} = '';									# cleanup/allows rigctrl failures during test
 
 # net_receiveqso will write received network QSOs to @net_qsos, which is a data
 # structure like @qsos, and can be pushed into @qsos
@@ -427,7 +439,7 @@ while (1) {										# begin main logging loop
 			&partialcheck(\$wpartialcheck, \%qso, \@qsos, \@scp);
 			&checkcall(\$wcheck, \@qsos, $qso{'call'});
 			&dupecheck(\$wmain, \%qso, \@qsos) unless $editnr;
-			&callinfo() unless ($contest eq 'UBA-FD');
+			&callinfo() unless ($contest eq 'UBA-FD');#ON4ACP
 		}
 		$oldcall = $qso{'call'};
 		$oldeditnr = $editnr;
@@ -488,7 +500,6 @@ while (1) {										# begin main logging loop
 
 				touchwin($wmain);					# Restore Screen etc.
 				touchwin($wrate);
-
 				if ($editnr){
 				&displaylog(\$wmain, \@qsos, $editnr);
 				}else{
@@ -501,7 +512,7 @@ while (1) {										# begin main logging loop
 						\%s_dupes, $s_sum);
 				&rate(\$wrate, \@qsos);
 				&checkcall(\$wcheck, \@qsos, $qso{'call'});
-				&callinfo() unless ($contest eq 'UBA-FD');
+				&callinfo() unless ($contest eq 'UBA-FD');#ON4ACP
 				if ($ops) {
 					addstr($wmain, 9, 62, "                 ");
 					if (length ($ops) > 13) {
@@ -696,7 +707,6 @@ sub find_file {
 		exit(1);
 	}
 }
-
 
 # Local Variables:
 # tab-width:4

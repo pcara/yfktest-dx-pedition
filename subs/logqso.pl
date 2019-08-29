@@ -57,9 +57,9 @@ sub logqso {
 				$qso{'exc3'}, $qso{'exc4'}, $qso{stn}, $qso{'ops'});
 
 
-#		if ($qso{stn} eq $main::netname) {
-#			print $main::netsocket "YFK:$logline";
-#		}
+		if ($qso{stn} eq $main::netname) {
+			print $main::netsocket "YFK:$logline";
+		}
 
 #		$invalid = 0;
 		return 1;
