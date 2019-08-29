@@ -1,0 +1,1 @@
+rigctld -m 1801 -r /dev/ttyS0 -s 1200 &

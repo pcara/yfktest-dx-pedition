@@ -1,0 +1,2 @@
+sort -t';' -k7,7 SSBFD6NB120901.yfk | cut -d';' -f 1-10 > SSBFD6NB120901.yfk.sorted
+

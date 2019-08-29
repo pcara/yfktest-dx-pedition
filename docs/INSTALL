@@ -1,0 +1,9 @@
+
+yfktest is the executable file, nothing to install or setup. See docs/README
+	docs/MANUAL, and docs/ARRL-FD-HOW-TO.TXT for more information.
+
+** Note this version runs from the directory where the files were downloaded to.
+	Untested coding for a full-packaged-styled install including placement
+	via $PREFIX and similar variables reside in the misc/ directory.
+
+updated 20 June 2011 by Bob, w9ya

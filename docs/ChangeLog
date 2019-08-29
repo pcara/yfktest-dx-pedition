@@ -1,0 +1,146 @@
+0.0.10-svn /    As of the week of 09-12 Apr. 2012  - Bob, w9ya <w9ya@amsat.org>
+
+CHANGES;
+
+QSO # in Edit mode line 23 info is now anchored.
+Deletion of logged qso's now possible by replacing the callsign w/ "DEL" at the
+	beginning of this entry field. *** Scoring does NOT count these deletions.
+ADDED alt+c configuration menu/full screen window.
+ADDED "ops" field to qso-hash to allow clubs and multi-op setups to follow ops'
+	contributions. INCLUDES on screen info AND on-the-fly setup and changes.
+Changed editing subsroutine to take into account the new field INCLUDING having
+	an empty "ops" field.
+ADDED qrp-arci-qso-party contest template (def) file and mods for same in newcontest.pl .
+ADDED new overall multiplier ($multall) to the scoreqso.pl .
+Cabrillo file now writes required "3.0" instead of "3" .
+			 (As per Jeff-KA1DBE's note about robots et al)
+Lengthened cw message fields to 33 char. & spaces (EDITING limit) from 25.
+ADDED auto-cq-repeat, by toggling F1-keypresses, to allow "running stations".
+
+
+0.0.10-svn /    As of 25 Mar. 2012  - Bob, w9ya <w9ya@amsat.org>
+
+CHANGES;
+
+1st (startup) screen NOW has live config file data (+ config file locations.)
+*New* CQWW files are included.
+Refreshing: ALL the upper windows: specifically the wildcard window the (cty/scp/sections), i.e.
+        was not being refreshed when backing/coming-out of rate or help screens.
+Refreshing: CALL/LOG INFO window in the upper left aftr cw-message editing.
+CW memories v/v Function keys (nature of content ala defs/log files) shown ALL the time on screen.
+        if the new config 'showmsgkeys' selected via the config file.
+Added info abt "enter" key to cycle thru & put on line 23 (ala alt-k mode) 4 alt-m mode.
+Line 21 and 23 (status lines) re-worked for consistent behavior.
+Rig-control will/should NOW not cause the program to die if selected but the rig is off-line.
+F8 and F9 now contain '73' and 'SRI WRK B4' for cw memories.
+
+
+0.0.10-svn /    As of 29 Feb. 2012  - Bob, w9ya <w9ya@amsat.org>
+
+CHANGES:
+
+CQWW def changes (Need to dbl. check these against BOTH the correct and the PUBLISHED CQWW cab
+DUPES do not log with new config file addtions.
+        Added no-log-a-dupe (nologdupe) as a config option.
+        Added nologdupe override (alt-l) and documented this.
+Rig-control and WinKey control can be ignored and setup skipped with config file additions.
+Tab-Key can be used like the space key & toggle between fields
+                 instead of default snap to callsign field.
+CW-Speed can also be set with the user's config file.
+Both the help and rate windows have both better and correct information.
+Program is essentially self-documenting while in use.
+... Add info about ctrl-c WITH config file info and caps lock caution to first screen.
+... Added sample config file with N0CALL for callsign.
+Added ability to change color scheme from defaults ala the config file.
+Changed first screen copyright info.
+Moved color selection to subs/.
+Better messages & corrected speeling - new contest selection & screen to load pre-existing logs.
+Added automatic window resizing for ARRL-FD operation.
+Currently selecting ARRL-FD uses the dummy.scp file which *can* allow for us &/or fd only files.
+Added newer uathors to copyright status
+Cleaned up messy comment locations and improved formatting of same in main program file.
+Added support for config file in local (main program) hierarchy !
+Badfilename in command line now errors on line 23, in red, with instructions.
+ESC nows works while editing cw messasges ** PLUS status for line 23 in red added.
+Line 23 now a full-status and info line during ALL operations including red "Edit" (during edit).
+.....The status-line (no. 23) is much better behaved now.
+Add sample config file with N0CALL for callsign.
+Status in the window during log-file-fetching and rescoring !
+ADIF file selection during "filebrowser" no longer cause yfktest to die & screwup the x-terminal.
+ARRL-FD file qsy band restricted to just the bands in use for that contest.
+
+SUPPOSEDLY FIXED (Should be fb om):
+
+Fix dump-out and terminal lockup(lockout?) when filetype selected from file menu (3rd) = bad
+'.....????.yfk not found. Exiting' but does NOT exit !! (Hi Hi) - WORKS, BUT BY WORDED PROMPT.
+Fix **AND DOUBLE CHECK** *fresh &/or making* .yfk file w/ editing and (status/)line 23 - WORKS.
+Minimal Config File needs to be checked. - TESTED
+Much better error messages about file and startup needed. ** grep endwin - WORKS
+Change copyright info in file(s) 2 add others (contributors) aftr conferring w/ Fabian. - NOT YET
+Line 23 operation o.k. with color changes. - WORKS
+Make all THREE options PLUS the default color-schemes & test w/ & w/out config file - WORKS.
+Make sure keyer operation is still fully correct after the changes. - WORKS
+
+
+0.0.10-svn /    As of 19 June 2011  - Bob, w9ya <w9ya@amsat.org>
+	* Numerous changes in the past few years by ct1drb, ws6z, oh1fjv,
+	  dj1yfk, and most recently by myself.
+	* Also includes rearranging the directory structure adding docs/
+	  and misc/ directories.
+	* Experimenting with different color and sub-windows schemes. These
+	  are located in the file yfktest-ARRL-FD.	   
+
+0.0.9 / 2008-06-16   Fabian Kurz   <mail@fkurz.net>
+	* Added a few contests, including ARRL-Fieldday, All-Asian, King of
+	  Spain, NRA, CNCW. Thanks to CT1DRB for his help!
+	* Added a crude file browser to select a file to load, if not specified
+	  as command line argument.
+	* Alt-H shows a little help screen
+	* Mycall can be read from a config file (~/.yfktest) now.
+	* Alt-R shows a rate graph of the current contest
+
+0.0.8 / 2008-02-14   Fabian Kurz   <mail@fkurz.net>
+	* Added ARRL-DX contest (DX- and US-side, with exchange guessing)
+	* Empty mode when polling hamlib while logging a QSO should not occur
+	anymore.
+
+0.0.7 / 2008-01-28   Fabian Kurz   <mail@fkurz.net>
+
+	* Added the FOC Marathon
+	* Minor cosmetic enhancements.
+	* Documentation updated.
+
+0.0.6 / 2008-01-23   Fabian Kurz   <mail@fkurz.net>
+
+	* Added some more contests.
+
+0.0.5 / 2007-10-22   Fabian Kurz   <mail@fkurz.net>
+
+	* Fixed bug in adif export, field for received serial number now properly
+	formatted.
+
+	* Changed linebreaks in output files (Cabrillo, ADIF, SUM) to DOS.
+	
+	* "Check Call" window extended, now shows 2nd exchange (if any)
+
+	* Added contests: DTC, WAG, EU-Sprint, CQWW, OK-OM-DX (DX side)
+
+	* Added possibility to edit CW messages (Alt-M)
+
+	* Pressing tab now jumps back to the callsign
+
+0.0.4 / 2007-08-20   Fabian Kurz   <mail@fkurz.net>
+
+	* Rig control now done via hamlib's Perl bindings.
+	
+	* Added contests: YO-DX, IARU Region 1 Fieldday, SAC
+
+0.0.3 / 2007-08-01   Fabian Kurz   <mail@fkurz.net>
+
+	* Improved keyboard handling; Alt-key-combinations should work on all
+	terminals now.
+
+	* Added NAQP, EUHFC and RDA-Contest (RU/DX-Side)
+
+	* Fixed IOTA definition to allow logging AF-IOTAs.
+

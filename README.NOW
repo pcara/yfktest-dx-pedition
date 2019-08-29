@@ -1,0 +1,73 @@
+DO YOU WANT TO GET STARTED RIGHT AWAY - HERE'S WHY AND HOW TO DO THAT.
+
+
+WHY? -  O.K....so we ALL know the docs are for sissys and real guys
+	and gals just want to get started RIGHT NOW.... well here
+	is a suggested way to start having FUN immediately !
+
+
+HOW? - :
+
+1) Open a terminal window by pressing the keys below if your using
+	Ubuntu or something similar:
+
+	Ctrl+Alt+t	(The + is not typed, it means to hold the
+				keys down at the same time.)
+
+	(**** You could even run this, and I have, from any sort of
+		terminal, including the direct tty's in your *nix
+		install !!)
+
+2) Then type the following lines, one at a time, at the prompt:
+			(be sure NOT type the "<enter>", that's the
+				name of the key you hit to enter the
+				line you just typed...)
+
+	mkdir -p logging/yfktest_svn/ <enter> 
+	cd logging/yfktest_svn/ <enter>
+	svn checkout svn://dl0tud.tu-dresden.de/yfk/yfktest/trunk <enter>
+	cd trunk <enter>
+
+3) Next it is STRONGLY recommended that you use the sample configuration:
+			*** Make sure the '.' (dot) is before "yfktest"
+				or you will overwrite the program file !!
+
+	cp -a config.yfktest.sample .yfktest <enter> 
+
+4) Then to run the program the first time:
+
+	./yfktest <enter>
+
+5) Be sure to read the info on the first/start screen. For more info on
+	the latest features; the docs/FAQ-NEW-INFO file is where the
+	latest documentation will be found.
+
+
+OOPS - :
+
+*  IF the "svn checkout..." line didn't work then you need to install the
+		subversion/svn package.
+** IF yfktest does not work:
+
+	- Did you forget to put the leading dot in front of the cp command
+		in step no.3 ? You get to start over !!! (Hey Hey...)
+
+	- Did you not type step 4 EXACTLY ?
+
+	- You might need to install the perl INET, curses, and possibly the
+		strict PERL modules. If you are running Ubuntu-linux please
+		see the ARRL-FD-HOW-TO.txt file located in the docs/ folder
+		for more specific info. (Every linux distro should offer
+		these modules as well as the hamlib package which is needed
+		if you want to use the rig-control built into yfktest.)
+
+*** yfktest starts but acts strangely, shows an error message, &/or quits.
+
+	- Did you begin your testing without doing step 3 ?
+
+
+Created: 06-Mar.-12 - Bob, w9ya
+Updated: 22-Mar.-12 - Bob, w9ya
+Updated: 25-Mar.-12 - Bob, w9ya
+Updated: 09-Apr.-12 - Bob, w9ya
+Updated: 23-Apr.-12 - Bob, w9ya

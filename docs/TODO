@@ -1,0 +1,97 @@
+YFKtest TODO list (feel free to add things!)
+--------------------------------------------
+
+
+As of 29 Feb. 2012 - w9ya
+(PLUS A few additions as of 22 Mar. 2012 - w9ya)
+(And a few deletions !!! as of 25 Mar. 2012 - w9ya)
+(And even more adds/moves/changes as of 09 Apr. 2012 - w9ya)
+
+
+TO-DO (Before next release):
+
+Fix esc-key i.e. allow immediate &sendcw('esc') from the esc-key as well as the alt+x keypress.
+Fix the intended (?/apparently) restoration of $tmpqso to restore (line22) fields aftr. editing.
+ 
+.......... ARRL-FD seems to replace "NR" as '5?' .
+.......... Winkey set-up screen needs info on which keys to use, perhaps status (red line 23 ?)
+..........   "      "    - Are the selections themselves properly declared ?
+
+** DONE ? - Decide on either a new config file selection OR a permament (arrl-fd) dummy.file select.
+See if ANY routines are better moved from "main".pl to subs/ .
+See if ANY code within ANY subroutines (or yfktest) can be turned into more subs.
+DOC files updated;
+... and rearranged as needed.
+... and (maybe) create doc abt. sample config file & possibly make config file self documenting !
+Make sure ALL of the above works from a "cold" start.
+Add in the new 'database' files de: ct1drb.
+Check for any more adds/move/changes that are on paper.
+DOUBLE-check older to-do files for anything not yet done.
+DOUBLE CHECK "supposedly fixes" with third party testing !
+Get Fabian ready for a 0.0.10 release !!
+
+
+WISH-LIST (Long term ideas):
+
+Make "DEFS_HOW_TO" (plus template?) (requested by Jeff, KA1DBE)
+Consider method to add more to defs while still allowing current style def files.
+VA-QSO-Party rules for scoring and cabrillo submissions brings out four issues;
+..... yfktest dupes are strictly based on callsign field YET VA-QSO considers a dupe based on
+		band-mode-county. Many other logging programs suggests adding /??? for county
+		to allow for dupes logging since they are not dupes, ** yfktest does not need this
+..... Call check window will ONLY show the last band-mode dupe...yet there can be more than one
+		since this contest is structured as band-mode-county = dupe
+	PLUS window does not (nec.) indicate mode either !!!
+..... Multiple of 3 are NOT allowed for mobile station but ONLY for the contact WITH the mobile..
+..... Multiples are not scored per band-mode.
+************** Thanks to Jeff, KA1DBE (user) and Dick, W2YE ... VA-QSO Rules Comittee Member.
+DXPED logging uses different colors and info in the summary window...
+...incorporate similar scoring window for ARRL-FD yet still have mults correctly calculated.
+Finish removing rig control & winkeyer setups 2 sub-directory/ i.e. references to TWO file
+.. locations - local and in sub-directory for .sh files.
+... then test for operation including minimal config file.
+
+Show qso-in-log blacked-out /t same aftr. as b4 going into rate or help screens from EDIT mode.
+Consider having section info in ARRL-FD (for instance) color in sections worked.
+
+(Fix file select screens to kill working screen before asking for exit on bad file selection.)
+... and/OR (& IF POSSIBLE) move all the log files into a separate directory for cleaner selection.
+** IF POSSIBLE; get working atl-H & O (uppercase) in case caps lock is on & help screen is needed.
+Scroll horiz. does not work to select new contest (only pre-existing log) ?
+Add a way to load various "database" (de: third parties) files.
+Correct the ALt-k (and Alt-o) remanant (sp?) character in call field.
+Trap or otherwise avoid "baudrate" error message when winkey selected but not connected.
+Add DUPECHECKING and RE-SCORING to/immmediately after editing function.
+......... the above (most likely) *will*(/could ?) create new problems with qso numbering.
+See if ANY routines are better moved from "main".pl to subs/ .
+
+
+
+As of 19-24 June 2011 - w9ya
+	- Add some sort of ability to select different sized sub-windows AND
+	  color schemes. Possibly defaults and selection from either the defs
+	  files and/or the ~/.yfktest file.
+	- Find a working solution (i.e. easily added in) for adding at least
+	  two outgoing exchange fields. OR at the very least find a way to
+	  include a space in the one outgoing exchange field during the contest
+	  setup dialog.
+	- ALT-K now works w/ winkey too - but no "zero" output.
+	- Add a CwOps/CWT defs.
+	- Work on the HOW-TO stuff....currently called ARRL-FD-HOW-TO. i.e.
+	  Try to make it more generic, or at least less kludgy.
+	- Is there an adif generation issue ? i.e. Noted that the exchange
+	  field is always 5NN. Is this correct for some silly reason ?
+	- Create a method to setup and initilize the keyer with options from
+	  inside of yfktest.
+	- Allow choice of cwdaemon/winkeydaemon as runtime/configfile/ or ??
+		(Is cwdaemon still "current" and/or usable ???)
+		*** Note: winkeyer ONLY seems to take upppercase characters.
+
+
+$Id: TODO 36 2008-06-21 16:47:05Z dj1yfk $
+
+Adding Contests
+---------------
+http://www.vhfcc.org/hfcc/rules/2008/rssbfd.shtml (requested by G8JTL)
+
+

@@ -1,0 +1,127 @@
+Simple HOW-TO for using YFKTEST for logging the ARRL Field Day Contest:
+		de Bob, w9ya		June 2011
+
+**** UPDATED: 29-FEB-12 - Where you see asterisks !! (Bob F., w9ya)
+
+
+Installing under Ubuntu 10.10 (or later) using the "classic"(gnome) login;
+	- Make sure you have “subversion” installed, via the (Alt+F1, System,
+		Administration,) Synaptic Package Manager.
+**** 	(Synaptic is no longer installed as default in v. 11.10. You can either;
+		- Install it OR
+		- Use the new default: Ubuntu Software Center.)
+	- IF you want to use the winkeyer interface you will need to also
+		install this package;
+                	libio-socket-inet6-perl
+****	(As of 11.10 libcurses-perl MAY not be installed as default. SO;
+		- Install the libcurses-perl package, if the program complains
+			about lack of colors or ability to run.)
+	- Open up a terminal by;
+                typing Ctrl+Alt+t (the plus symbol means you press all of the
+			keys the same time)
+        - Set aside a place to get to and use your program. I suggest invoking
+		this;a
+                	mkdir /~/logging/yfktest/ <enter>
+				(do NOT type out ‘enter’, rather press that key)
+		and then;
+                	cd /~/logging/yfktest/ <enter>
+		finally this;
+          svn checkout svn://dl0tud.tu-dresden.de/yfk/yfktest/trunk <enter>
+        
+
+
+Preparing for use;
+
+****	NOTE: There are many new configurable options. See the startup screen
+		for more info.
+        - Open up the terminal again (Ctrl+Alt+t) and configure it;
+          	from the menu-bar using Edit, Keyboard Shortcuts, making sure
+	  	that you change any shortcuts that use F1 through F7, F11, and
+	  	any of the Alt-key sequences that yfktest’s internal help page
+	  	calls out. (More on the help page below.)
+****	NOTE: With ubuntu version 11.10 some or all of this cannot be (easily)
+		changed. So; I added Alt-o (make sure your caps lock is off)
+		to get to the help screen. No other changes seemed necessary.
+        - It’s important to make sure the terminal is showing 24x80 mode. This
+		can be set from the Terminal section of the menu-bar's
+		selections. 
+
+
+Testing and Preparing your Winkeyer and the interface;
+	- Your Winkeyer can be either a USB-Winkeyer OR a Serial-Winkreyer
+		augmented with a USB-to-serial-cable.
+			(These cables work Great in Linux !!)
+	- I *strongly* suggest using “WkDemo”, available as a download from
+		K1EL’s website, to configure your winkeyer. To run this you
+		will need to install ‘Wine’.
+        - Install ‘Wine’ using the Synaptic Package Manager. Same way you did
+		above to install the inet6-perl module and subversion.
+****	- OR use the Ubuntu Software Center application.
+        - To allow ‘Wine’ to communicate with your USB connected Winkeyer be
+		sure to (again inside a terminal window i.e. Ctrl+Alt+t);
+                	cd ~/.wine/dosdevices/ <enter>
+                	sudo ln -s /dev/ttyUSB0 com1 <enter>
+                ** (Of course if you are using a serial interface then use;
+			/dev/ttyS0 instead !)
+        - Use WkDemo to setup your Winkeyer settings. I have found this to
+		work well even with my VERY old winkeyer (V3 pcb with a V10
+		chip) and a dirt-cheap ebay special USB-to-Serial converter
+		running on /dev/ttyUSB0. WkDemo is directed to use com1 and
+		with the above "ln -s" this is directed to the linux kernel
+		drivers using the above command.
+	  * NOTE: since only ONE program can access the serial/usb port at a
+		time, be sure that you are NOT *ALSO* connected with the
+		WkDemo program when using yfktest. (Conversely yfktest
+		cannot *ALSO* be using the keyer and so must not be running
+		when using WkDemo.)
+
+
+Running yfktest;
+        - Be sure you are in the right place;
+                Make sure your terminal is (still) opened up. If not then type
+				Ctrl+Alt+t,
+			then type;
+                                cd /~/logging/yfktest/ <enter>
+
+	- Type: ./yfktest <enter>
+                - The first time through you will have to select the
+				ARRL-FD template from the window and fill it
+				out using the arrow keys and the <enter> key.
+            	- Next time through invoke this to select the contest file;
+                	./yfktest ARRL-FD.yfk <enter>
+
+	- Play around a bit. Logging is simple with these 6 simple rules;
+		- The <tab> key will bring you to the callsign entry “window”
+****	NOTE: This can be changed by using the configuration panel whiel the
+			yfktest program is running by pressing the alt+c keys.
+	      		The behavior can be either:
+				a) -  the <tab> key works like the <space> key.
+				b) -  the <tab> key snaps you back to the call
+					entry field.
+		- The <space> bar/key will toggle through the 3 input “windows”
+		- The <enter> key will log the completed contact.
+		- Alt+o or Alt+h brings up the help screen.
+		- Alt+c brings up the configuration screen.
+		- If things jam up (like trying to use Alt+k/keyboard CW mode;
+			use Alt+w or F11 to erase the exchange/callsign info.
+		- If things jam up badly, you can always hit Ctrl+c to force
+			the program to quit.
+
+
+Helpful suggestions;
+	- To re-invoke the program after using QUIT or EXIT (in the callsign entry
+		field of the contact logging line), you can use the <up-arrow>
+		key to scroll back through your previous terminal commands.
+****	NOTE: The idea below is to have your station class and section on one cw
+		send key (F2) (and one cabrillo log entry per qso).
+        - I *strongly* suggest using an ascii text editor (my favorite is
+		‘nano’) to add a space to separate the class and section keying
+		output. This is on line number 10 of the following file.
+			Invoke editing like this;
+                        	nano -w ARRL.yfk <enter>
+                                	(then scroll down to line number 10.)
+
+updated 20 June 2011 by Bob, w9ya
+updated 29 Feb  2012 by Bob, w9ya
+updated 13 Mar  2012 by Bob, w9ya
+updated 09 Apr  2012 by Bob, w9ya

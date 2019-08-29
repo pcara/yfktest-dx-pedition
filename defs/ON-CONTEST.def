@@ -1,0 +1,114 @@
+ON-CONTEST								# contest name
+dxcc-band-mode								# multiplier 1 -> dxcc by band and by mode
+oncontest									
+# score
+-									# multiplier 2
+4									# # of exchange fields
+3									# length of exchange field 1
+3									# length of exchange field 2, quickhack for true rsts
+3									# length of exchange field 3, quickhack for true rstr
+3									# length of exchange field 4
+[0-9]									# regex for every single character in exchange field 1
+[0-9]{3,4}								# regex for complete valid exchange field 1
+[0-9]									# regex for every single character in exchange field 2
+[0-5][0-9]								# regex for complete valid exchange field 2
+[0-9]									# regex for every single character in exchange field 3
+[0-5][0-9]								# regex for complete valid exchange field 3
+[M-Nm-n]								# regex for every single character in exchange field 4
+									# regex for complete valid exchange field 4
+QSO: %5s %s %s %s %-13s %3s %03s %-13s %3s %4s				# cabrillo definition - how to format the info
+freq mode date utc mycall rsts nr call rst exc1				# cabrillo definition - what info is included
+UBA FIELD DAY								# CBR (cabrillo) name - "title" for cabrillo file
+exc1s									# which fixed exchange is selected (variable assignment)
+CQ MYCALL MYCALL TEST							# F1
+5NN NR NBT								# F2
+TU MYCALL								# F3
+MYCALL									# F4
+HISCALL									# F5
+NR NBT									# F6
+?									# F7
+BEGIN BONUSLIST
+AAA,
+ACC,
+ARC,
+AST,
+ATH,
+ATO,
+BDX,
+BLW,
+BRC,
+BSE,
+BTS,
+BXE,
+CDZ,
+CLR,
+CPN,
+CRD,
+DNZ,
+DRC,
+DST,
+EKO,
+ERA,
+GBN,
+GBX,
+GDV,
+GNT,
+GTM,
+HAC,
+HCC,
+HOB,
+HRT,
+IPR,
+KSD,
+KTK,
+LGE,
+LIR,
+LLV,
+LUS,
+LVN,
+MCL,
+MLB,
+MNS,
+MTT,
+MWV,
+NBT,
+NLB,
+NMR,
+NNV,
+NOK,
+NOL,
+ODE,
+ONZ,
+ORA,
+OSA,
+OSB,
+OST,
+RAC,
+RAM,
+RAT,
+RBO,
+RCA,
+RCB,
+RCN,
+REM,
+RFA,
+RST,
+RSX,
+SBS,
+SNW,
+THN,
+TLS,
+TOR,
+TRA,
+TRC,
+TRK,
+TWS,
+VHF,
+WLD,
+WRC,
+WTN,
+WTO,
+XXX,
+ZLB,
+ZLZ,
+ZTM
