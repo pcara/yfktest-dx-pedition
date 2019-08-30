@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #!/usr/bin/perl -w
+=======
+#!/usr/bin/perl -w -I ./
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 
 # yfktest - a simple, single operator ham radio contest logbook
 # 
@@ -41,6 +45,10 @@ if ($hashamlib) {
 our $hamlibsock; 									# initialized later, if needed.
 our $hamlibrigd;
 our $cwsocket;
+<<<<<<< HEAD
+=======
+our $netsocket; #ON4ACP 190829 to broadcast QSO info
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 
 our $netname = "STN1";									# will be overridden later by found path
 our $contestpath = "defs/";
@@ -80,8 +88,12 @@ load_subs("colorinfo.pl");
 load_subs("setconfigs.pl");
 load_subs("whichlogfile.pl");
 load_subs("sendvoice.pl");
+<<<<<<< HEAD
 load_subs("showqsonr.pl");# ON4ACP big QSO number if toilet is installed
 load_subs("showubalist.pl");# ON4ACP show remaining 10-point stations
+=======
+
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 
 our $version = "0.0.10";
 
@@ -104,6 +116,15 @@ our $cabrilloline='no cabrillo format defined!';					# printf-string for the cab
 our $cabrillovalues='band date utc ...';
 our $cabrilloname='CONTEST-NAME';
 
+<<<<<<< HEAD
+=======
+our $submitname='';
+our $address1='';
+our $address2='';
+our $address3='';
+our $address4='';
+
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 our ($exc1len, $exc2len, $exc3len, $exc4len) = (4,4,4,4);
 
 our $fixexchange='';									# fixed exchange like in IOTA, ITU etc.
@@ -111,14 +132,21 @@ our $fixexchange='';									# fixed exchange like in IOTA, ITU etc.
 our $fixexchangename='';								# what to ask the user for, like "IOTA-Ref:"?
 our $exc1s = '';									# actual value of the fixed exchange value
 our $exc2s = '';
+<<<<<<< HEAD
+=======
+our $exc3s = '';
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 
 our $tmp='';
 
 our $counter=0;
 our $counter1=0;
+<<<<<<< HEAD
 
 our $offset=1;# ON4ACP for consecutive dupes when not rescoring
 
+=======
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 my $curpos = 0;
 
 our $lastguessed = '';									# For guessexchange-only consider every callsign once & saved
@@ -165,6 +193,15 @@ our ($defmult1, $defmult2, $defqsopts);
 our @qsos;										# Array of hashes with single QSOs.
 #our @net_qsos : shared;								# Array of hashes with single QSOs received over the net
 
+<<<<<<< HEAD
+=======
+#ON4ACP 190829 Open netsocket to broadcast QSO info
+$netsocket = IO::Socket::INET->new(PeerAddr => "localhost",
+                PeerPort => "12060", Proto    => "udp", Type     => SOCK_DGRAM,)
+                or die "Cannot open socket for QSO broadcast.\n";
+
+
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 our @cwmessages  = ('');
 our $showmsgkeys = 0;
 
@@ -184,6 +221,7 @@ our %qso = (										# The current QSO
 		'rst' => '599',
 		'excs' => '',								# sent exchange
 		'exc1' => '',
+<<<<<<< HEAD
 		'exc2' => '59',
 		'exc3' => '59',
 		'exc4' => '',
@@ -191,6 +229,15 @@ our %qso = (										# The current QSO
 		'freq' => '',
 #		'mode' => 'CW',
 		'mode' => 'SSB',							# for testing $cqrepeat stuff
+=======
+		'exc2' => '',
+		'exc3' => '',
+		'exc4' => '',
+		'band' => '20',
+		'freq' => '',
+		'mode' => 'CW',
+#		'mode' => 'SSB',							# for testing $cqrepeat stuff
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 		'stn' => $netname ,
 		'ops' => ''
 );
@@ -200,7 +247,11 @@ our %qso = (										# The current QSO
 our %tmpqso;										# current Q will be saved here while editing prev QSOs
 
 our $mycont='EU';									# Will change these two variables later as needed.
+<<<<<<< HEAD
 our $mydxcc='ON';
+=======
+our $mydxcc='DL';
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 
 our $cqinterval='10';									# from the start of cq to the start of the next cq
 our $cqrepeat=0;									# set/unset (a toggle) to repeat
@@ -240,7 +291,11 @@ For the latest info on this: you can read the docs/FAQ-NEW-INFO file.
 screen & the program will stop asking about this when you start it !
 
 ***** FIFTH - Here's an example of how to start yfktest & auto-load an
+<<<<<<< HEAD
 existing log (FD for instance); ./yfktest ARRL-FD.yfk (& press <enter>.)
+=======
+existing log (FD for instance); yfktest ARRL-FD.yfk (& press <enter>.)
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 
 ***********  That's it ! - Press the ENTER key & begin using yfktest.";
 
@@ -262,6 +317,7 @@ my @tmp = &dxcc($mycall);
 
 if ($modes eq 'SSB') {
 	$qso{'mode'} = 'SSB';
+<<<<<<< HEAD
 	if ($contest eq 'UBA-FD') {our $truerst = 1; $qso{'exc2'}='59'; $qso{'exc3'}='59';}# ON4ACP
 }
 
@@ -276,6 +332,18 @@ if ($main::exc1s =~ /\//) {
 }
 
 
+=======
+	$qso{'rst'} = '59';
+}
+
+($qso{'band'} = $bands) =~ s/[MG]$// if ($bands ne 'ALL');
+
+if ($exc1s =~ /\//) {
+	my $fix = $exc1s;
+	($exc1s, $exc2s, $exc3s) = split (/\//, $fix);
+}
+
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 # Activate Hamlib if needed.
 
 &hamrigctrl();
@@ -296,7 +364,11 @@ print $cwsocket chr(27)."2$cwspeed";
 # Add "secret" F8 and F9 CW-Messages.
 
 $cwmessages[7] = '73';
+<<<<<<< HEAD
 $cwmessages[8] = 'SRI WKD B4';
+=======
+$cwmessages[8] = 'SRI WRK B4';
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 
 # Adjust scp if wanted/needed.
 
@@ -315,16 +387,23 @@ if ($contest eq "ARRL-FD"){
 our $wmain = newwin(24,80,0,0);
 attron($wmain, COLOR_PAIR(3));
 addstr($wmain, 0,0, ' 'x(24*80));
+<<<<<<< HEAD
 addstr($wmain, 23, 0, "     Logging Mode                             ALT+o/h:Help ");
+=======
+addstr($wmain, 23, 0, "     Logging Mode                              ALT+o/h:Help ");
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 refresh($wmain);
 
 our $wcheck = newwin(($contest eq 'DXPED' ? 10 : 7), 38,0,0);
 attron($wcheck, COLOR_PAIR(4));
+<<<<<<< HEAD
 if ($bands eq 'RESTRICTED'){ # ON4ACP Only 3 bands needed => can make room for rates and CW-spd
         $wcheck = newwin(4,38,0,0);
 }
 addstr($wcheck,0,0, ' 'x380);
 refresh($wcheck);
+=======
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 
 our $winfo = newwin(($contest eq 'DXPED' ? 3 : 6), 35, 
 	($contest eq 'DXPED' ?  11 : 8),0);
@@ -336,6 +415,7 @@ our $wshowscore = newwin(10,21,14,59);
 our $wpartialcheck = newwin(9,40,0,39);
 
 if ($contest eq "ARRL-FD"){
+<<<<<<< HEAD
 	$winfo = newwin(6,45,8,0);
 	attron($winfo, COLOR_PAIR(4));
 	addstr($winfo, 0,0, ' 'x(6*45));
@@ -359,11 +439,25 @@ if ($bands eq 'RESTRICTED'){# ON4ACP No need for big window when only using 3 ba
 }
 
 
+=======
+	$winfo = newwin(6,47,8,0);
+	attron($winfo, COLOR_PAIR(4));
+	addstr($winfo, 0,0, ' 'x(6*47));
+	refresh($winfo); 
+	
+	$wshowscore = newwin(10,21,14,59);
+	$wpartialcheck = newwin(7,40,0,39);
+
+	addstr($wmain, 9, 48, "$contest");
+}
+
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 our $wrate = newwin(4, 16, 10, 62);
 attron($wrate, COLOR_PAIR(4));
 addstr($wrate, 0,0, "   QSO Rates:   ");
 addstr($wrate, 1,0, " "x66);
 addstr($wrate, 3,0, "  CW-Speed: $cwspeed");
+<<<<<<< HEAD
 
 our $wqsonr = 0;
 
@@ -381,6 +475,8 @@ if ($bands eq 'RESTRICTED'){# ON4ACP No need for big check call window when only
     if (`which toilet`) {$hastoilet=1}
     &showqsonr(\$wqsonr, \%qso);
 }
+=======
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 refresh($wrate);
 
 my $ch='';
@@ -393,13 +489,22 @@ my $ch='';
 &checkcall(\$wcheck, \@qsos, 'blabla');
 
 if (length ($ops) > 13) {$ops = substr $ops, 0, 13;}
+<<<<<<< HEAD
 if ($ops) {addstr($wmain, 9, 59, "Op: $ops  [ALT+p]");}
 unless (($contest eq 'DXPED')||($contest eq 'UBA-FD')) {addstr($wmain, 9, 46, "$contest");}
 if ($contest eq 'UBA-FD') {addstr($wmain, 8, 66, "$contest");}# ON4ACP moving with the layout a little so we can get big qso numbers
+=======
+if ($ops) {addstr($wmain, 9, 62, "Op: $ops");}
+unless (($contest eq 'DXPED') || ($contest eq 'ARRL-FD')) {addstr($wmain, 9, 46, "$contest");}
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 
 my $oldband = $qso{'band'};								# used to insure cqrepeats are requested anew
 my $oldmode = $qso{'mode'};                                                             #    after band or mode changes
 my $oldtime = (time + $cqinterval);							# timer i.e. oldtime = (time + $cqinterval)
+<<<<<<< HEAD
+=======
+$qso{'freq'} = '';									# cleanup/allows rigctrl failures during test
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 
 # net_receiveqso will write received network QSOs to @net_qsos, which is a data
 # structure like @qsos, and can be pushed into @qsos
@@ -427,7 +532,11 @@ while (1) {										# begin main logging loop
 			&partialcheck(\$wpartialcheck, \%qso, \@qsos, \@scp);
 			&checkcall(\$wcheck, \@qsos, $qso{'call'});
 			&dupecheck(\$wmain, \%qso, \@qsos) unless $editnr;
+<<<<<<< HEAD
 			&callinfo() unless ($contest eq 'UBA-FD');
+=======
+			&callinfo();
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 		}
 		$oldcall = $qso{'call'};
 		$oldeditnr = $editnr;
@@ -473,6 +582,7 @@ while (1) {										# begin main logging loop
 				&wipeqso(\%qso, \$curpos, \$activefield);
 				$oldtime = (time + 2);
 			}
+<<<<<<< HEAD
 			elsif ($ch eq 'opchange') {
 				attron($wmain, COLOR_PAIR(6));
 				addstr($wmain, 9, 59, "Op: ");
@@ -480,6 +590,8 @@ while (1) {										# begin main logging loop
 				attron($wmain, COLOR_PAIR(3));
                                 addstr($wmain, 9, 59, "Op: $ops  [ALT+p]");
 			}
+=======
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 			elsif ($ch eq 'help' || $ch eq 'rate' || $ch eq 'config') {	# alt-h or alt-r or alt-c
 
 				if ($ch eq 'help') { &showhelp(); }
@@ -488,7 +600,10 @@ while (1) {										# begin main logging loop
 
 				touchwin($wmain);					# Restore Screen etc.
 				touchwin($wrate);
+<<<<<<< HEAD
 
+=======
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 				if ($editnr){
 				&displaylog(\$wmain, \@qsos, $editnr);
 				}else{
@@ -501,13 +616,21 @@ while (1) {										# begin main logging loop
 						\%s_dupes, $s_sum);
 				&rate(\$wrate, \@qsos);
 				&checkcall(\$wcheck, \@qsos, $qso{'call'});
+<<<<<<< HEAD
 				&callinfo() unless ($contest eq 'UBA-FD');
+=======
+				&callinfo();
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 				if ($ops) {
 					addstr($wmain, 9, 62, "                 ");
 					if (length ($ops) > 13) {
 						$ops = substr $ops, 0, 13;
 					}
+<<<<<<< HEAD
 					addstr($wmain, 9, 59, "Op: $ops  [ALT+p]");
+=======
+					addstr($wmain, 9, 62, "Op: $ops");
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 				}else{
 					addstr($wmain, 9, 62, "                 ");
 				}
@@ -517,7 +640,11 @@ while (1) {										# begin main logging loop
 			}
 			elsif ($ch eq 'cwmessages') {					# Alt-m
 				&editcwmessages(\$wcheck);
+<<<<<<< HEAD
 				addstr($wmain, 23, 0, "     Logging Mode                             ALT+o/h:Help ");
+=======
+				addstr($wmain, 23, 0, "     Logging Mode                              ALT+o/h:Help ");
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 				&checkcall(\$wcheck, \@qsos, 'blabla');
 				&checkcall(\$wcheck, \@qsos, $qso{'call'});
 			}
@@ -525,7 +652,10 @@ while (1) {										# begin main logging loop
 			elsif (($ch eq 'log' && (!$nologdupe or !$dupe)) || ($ch eq 'override' && $dupe)){
 				if (!$editnr){
 					&qsy(\%qso, \$curpos);				# check for: '20M', 'SSB', '21025' etc.
+<<<<<<< HEAD
 					&showubalist(\$winfo,\%qso) if ($contest eq 'UBA-FD');# ON4ACP
+=======
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 				}
 				if ($qso{'call'} eq 'QUIT') {
 					endwin;
@@ -552,11 +682,17 @@ while (1) {										# begin main logging loop
 					else {
 					&scoreqso(\%qso, \@qsos, \%s_qsos, \%s_qsopts, \%s_mult1,
 							\%s_mult2, \%s_dupes, \$s_sum);
+<<<<<<< HEAD
 					&showubalist(\$winfo,\%qso) if ($contest eq 'UBA-FD');# ON4ACP
 					}
 					&wipeqso(\%qso, \$curpos, \$activefield);
 					    if ($bands eq 'RESTRICTED'){# ON4ACP
 						&showqsonr(\$wqsonr,\%qso);}
+=======
+					}
+					addstr($wmain,22,35,"                                  ");
+					&wipeqso(\%qso, \$curpos, \$activefield);
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 					$oldtime = (time + 2);
 				}
 				elsif ($editnr && &logeditqso()) {	# edit old QSO
@@ -697,7 +833,10 @@ sub find_file {
 	}
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c64787687a2cf183a9fac2f6f2e0e281de61ca9f
 # Local Variables:
 # tab-width:4
 # End: **
