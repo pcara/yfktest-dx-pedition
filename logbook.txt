@@ -103,5 +103,6 @@ Untracked files:
 	subs/readakey.pl.phc
 
 no changes added to commit
-pcara@latitude /movies/HAM/yfktest/yfktest-dx-pedition $ git commit -a
+pcara@latitude /movies/HAM/yfktest/yfktest-dx-pedition $ git commit -am "<your 
+message>"
 
