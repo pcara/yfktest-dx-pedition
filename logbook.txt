@@ -11,7 +11,7 @@
 # * change operator with Alt+p. See readakey.pl and yfktest
 # * put a frequency on 60m for correct Cabrillo and ADIF output. See writelog.pl
 # * get QSO info broadcast over local network. See logqso.pl and yfktest
-# * Maybe: ESC key to stop sending CW (as alternative to Alt+x. See readakey.pl
+# * DONE: ESC key to stop sending CW (as alternative to Alt+x). See readakey.pl
 #
 sudo apt install libcurses-perl
 cd /mivies/HAM/yfktest

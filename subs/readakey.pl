@@ -23,6 +23,10 @@ sub readakey {
 
 	$ch = getch();
 
+	if (ord($ch) == 96) {		# ON4ACP 190831 This is the ~/` key just 
+		return 'esc';		# under ESC on a QWERTY
+		}			
+
 	if (ord($ch) == 195) {		# 2-byte sequence in some consoles
 		$ch = getch();		# 2nd byte. Alt + ?
 		if (ord($ch) == 171) {		# Alt-K
@@ -64,7 +68,7 @@ sub readakey {
 		if (ord($ch) == 104) {		# Alt-h
 			return 'help';
 		}
-		if (ord($ch) == 111) {		# Alt-o
+		elsif (ord($ch) == 111) {		# Alt-o
 			return 'help';
 		}
 		elsif (ord($ch) == 99) {		# Alt-c
@@ -90,6 +94,17 @@ sub readakey {
 		}
 		elsif (ord($ch) == 120) {	# Alt-x
 			return 'esc';
+		}
+# ON4ACP 190830 It is really not easy to find out whether the ESC key has been 
+# pressed when Alt is also encoded as ASCII 27... It looks like on my system
+# when nothing is pressed after chr(27), getch() gives you chr(45), which is 
+# a minus sign BTW, hence Alt+- also aborts sending... So I am coding that...
+# This is slower than pressing Alt-x since when nothing is pressed curses waits 
+# 0.1 sec before sending chr(45). This is the halfdelay(1) setting in yfktest
+# Anyway, pressing one of the paddles also stops sending.
+#
+		elsif (ord($ch) == 45) {	# ON4ACP trying to catch 'ESC'
+			return 'esc';		# to interrupt morse sending
 		}
 		else  {
 			return 0;
