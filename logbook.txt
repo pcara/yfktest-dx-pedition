@@ -83,3 +83,25 @@ id -Gn
 #Not member of dialout?? You have to logout and login again for changes to take 
 #effect!!
 
+# ON4ACP 190831 commit did not stage my files
+# probably because I changed several files and git rather lets you commit only
+# files you want to. To commit a singel file, you first have to add it (again).
+# to commit everything you can use git commit -a
+pcara@latitude /movies/HAM/yfktest/yfktest-dx-pedition $ git commit -m "Now also 
+key just under ESC on QWERTY aborts cw."
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+	modified:   logbook.txt
+	modified:   subs/readakey.pl
+	modified:   winkeydaemon.pl
+	modified:   yfktest
+
+Untracked files:
+	DXPED.yfk
+	subs/readakey.pl.phc
+
+no changes added to commit
+pcara@latitude /movies/HAM/yfktest/yfktest-dx-pedition $ git commit -a
+
