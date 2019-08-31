@@ -1,0 +1,85 @@
+#A Philippe Cara
+#D 190829
+#T Logbook for my DXpedition branch of yfktest
+#C I also have a fieldday branch which one day will be merged with this one
+#C First things I had to do to get everything working is install curses etc on 
+#  my Linux Peppermint 9... This is mainly what I put in this file. The rest is 
+#  in git.
+
+#C My ambition is to get at least the following things done. Many of them I have 
+#  already done in the past.
+# * change operator with Alt+p. See readakey.pl and yfktest
+# * put a frequency on 60m for correct Cabrillo and ADIF output. See writelog.pl
+# * get QSO info broadcast over local network. See logqso.pl and yfktest
+# * Maybe: ESC key to stop sending CW (as alternative to Alt+x. See readakey.pl
+#
+sudo apt install libcurses-perl
+cd /mivies/HAM/yfktest
+# The fieldday branch...
+git clone git@bitbucket.org:pcara/nbttest.git 
+# The DXpedition branch...
+git clone git@bitbucket.org:pcara/yfktest-dx-pedition.git
+# I have the original (as of 190829) branch in yfktest-orig-latest
+# Later I will branch the official code and submit my addons
+
+git commit -m "Fixed first line of yfktest to include -I ./ option so that subs can load."
+# This is OK in orig-latest and was not needed in older PERL versions
+
+# git asked me to configure it a bit...
+git config --global user.email "pcara@vub.ac.be"
+git config --global user.name "Philippe Cara"
+git add yfktest
+git commit -m "Fixed first line of yfktest to include -I ./ option so that subs can load."
+git push
+# To get the Fieldday branch going...
+sudo apt install toilet
+#Some tests...
+while true; do echo "$(date '+%D %T' | toilet -f term -F border  --gay)"; sleep 1; done
+#Also installed figlet for fun
+sudo apt install figlet 
+figlet Figlet!
+watch -n1 "date '+%D%n%T'|figlet -k"
+# Logged this for my Peppermint 9
+loginst
+toilet -f future 420
+
+#Looking at how top open an UDP server
+ grep cwsocket *
+ nano yfktest 
+ nano subs/logqso.pl 
+ nano yfktest 
+#I have a nice script to monitor UDP in another terminal 
+cat monitorUDPport.txt 
+./yfktest ../yfktest-orig-latest/DXpeditionMD.yfk 
+git commit -m "tried to restore QSO broadcasting on port 12060"
+git push
+sudo tcpdump -i lo -n udp port 12060 -X
+
+# ON4ACP 190830
+
+git commit -m "Messed up everything with git. So started over with the 
+original version of yfktest and will only add QSO broadcast and Operator change 
+with Alt+p."
+
+# Looking at ESC key
+nano winkeyer.pl 
+nano readakey.pl 
+#In keyboardmode.pl it works!!
+nano keyboardmode.pl 
+
+./winkeydaemon.pl
+# Could not open serial port... Forgot to install PERL module
+sudo cpan install Device::SerialPort
+./winkeydaemon.pl
+#Still not working... No write permission for /dev/tttyUSB0
+ls -l /dev/ttyUSB0 
+#owner is root, group is dialout
+id -Gn
+#I am not member of dialout :-(
+sudo adduser pcara dialout
+./winkeydaemon.pl
+#Still not working
+id -Gn
+#Not member of dialout?? You have to logout and login again for changes to take 
+#effect!!
+
