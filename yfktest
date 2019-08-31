@@ -297,7 +297,8 @@ print $cwsocket chr(27)."2$cwspeed";
 # Add "secret" F8 and F9 CW-Messages.
 
 $cwmessages[7] = '73';
-$cwmessages[8] = 'SRI WRK B4';
+$cwmessages[8] = 'SRI WKD B4'; 	# ON4ACP 190831 sorry, I think WKD is used more 
+				# frequently than WRK (= 'work') for this.
 
 #ON4ACP 190830 
 
