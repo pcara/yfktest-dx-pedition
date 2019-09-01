@@ -61,7 +61,6 @@ sub logqso {
 
 		if ($qso{stn} eq $main::netname) {
 			print $main::netsocket "YFK:".$logline;
-#$main::netsocket->send("YFK:$logline");
 		}
 
 #		$invalid = 0;

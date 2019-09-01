@@ -311,13 +311,32 @@ $cwmessages[8] = 'SRI WKD B4'; 	# ON4ACP 190831 sorry, I think WKD is used more
 #                or die "Cannot open socket for QSO broadcasting.\n";
 
 # ON4ACP 190901 This works:
+#   $netsocket = IO::Socket::INET->new(
+#                           PeerPort  => 12060,
+#                           PeerAddr  => '192.168.8.255',
+#                           Proto     => 'udp',    
+#                           LocalAddr => '192.168.8.100',
+#                           Broadcast => 1 ) 
+#                       or die "Cannot open socket for QSO broadcasting.\n";
+
+# ON4ACP 190901 Even better: determine the local network
+# First get first 3 bytes from the os (only takes primary IP address, using 
+# first cut. hostname -I gives 192.168.8.100 192.168.8.102 on my machine with 
+# eth0 and wlan0)
+#   my $localIPbcast = `hostname  -I | cut -f1 -d' ' | cut -f1-3 -d'.'`;	   
+   my $localIP = `hostname  -I | cut -f1 -d' '`;	
+# now add .255 at the end
+   my $lastbytepos = rindex($localIP, '.');
+   my $localIPbcast = substr($localIP,0,$lastbytepos+1)."255";
+
    $netsocket = IO::Socket::INET->new(
                            PeerPort  => 12060,
-                           PeerAddr  => inet_ntoa(INADDR_BROADCAST),
-                           Proto     => 'udp',    
-                           LocalAddr => 'localhost',
-                           Broadcast => 1 ) 
+                           PeerAddr  => $localIPbcast,
+                           Proto     => 'udp',
+                           LocalAddr => $localIP,
+                           Broadcast => 1 )
                        or die "Cannot open socket for QSO broadcasting.\n";
+
 
 # Adjust scp if wanted/needed.
 
