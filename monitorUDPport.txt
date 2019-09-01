@@ -1,2 +1,2 @@
-sudo tcpdump -i lo -n udp port 6789 -X
+sudo tcpdump -i lo -n udp port 12060 -X
 

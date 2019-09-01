@@ -12,6 +12,8 @@
 # * put a frequency on 60m for correct Cabrillo and ADIF output. See writelog.pl
 # * get QSO info broadcast over local network. See logqso.pl and yfktest
 # * DONE: ESC key to stop sending CW (as alternative to Alt+x). See readakey.pl
+# * In the orig-latest, I get Subroutine main::getchar redefined at subs/dxcc.pl 
+#   line 2. Maybe have a look at this?
 #
 sudo apt install libcurses-perl
 cd /mivies/HAM/yfktest

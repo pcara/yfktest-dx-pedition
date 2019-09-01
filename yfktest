@@ -289,7 +289,7 @@ if ($exc1s =~ /\//) {
 &winkeyer();
 
 	$cwsocket = IO::Socket::INET->new(PeerAddr => "localhost",
-		PeerPort => "6789", Proto    => "udp", Type     => SOCK_DGRAM,)
+		PeerPort => "6789", Proto    => "udp", Type     => SOCK_DGRAM)
 		or die "Cannot open socket for CWdaemon.\n";
 
 print $cwsocket chr(27)."2$cwspeed";
@@ -300,7 +300,24 @@ $cwmessages[7] = '73';
 $cwmessages[8] = 'SRI WKD B4'; 	# ON4ACP 190831 sorry, I think WKD is used more 
 				# frequently than WRK (= 'work') for this.
 
-#ON4ACP 190830 
+# ON4ACP 190830 Initiate $netsocket for QSO broadcast
+# N1MM uses port 12060 for UDP QSO broacast 
+
+# What I got here (mimicked from $cwsocket) does not work. It sends one packet 
+# and the other QSOs don't make it to the network. I don't understand why.
+#
+#	$netsocket = IO::Socket::INET->new(PeerAddr => "localhost",
+#                PeerPort => "12060", Proto    => "udp", Type     => SOCK_DGRAM)
+#                or die "Cannot open socket for QSO broadcasting.\n";
+
+# ON4ACP 190901 This works:
+   $netsocket = IO::Socket::INET->new(
+                           PeerPort  => 12060,
+                           PeerAddr  => inet_ntoa(INADDR_BROADCAST),
+                           Proto     => 'udp',    
+                           LocalAddr => 'localhost',
+                           Broadcast => 1 ) 
+                       or die "Cannot open socket for QSO broadcasting.\n";
 
 # Adjust scp if wanted/needed.
 

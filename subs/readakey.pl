@@ -27,6 +27,7 @@ sub readakey {
 		return 'esc';		# under ESC on a QWERTY
 		}			
 
+
 	if (ord($ch) == 195) {		# 2-byte sequence in some consoles
 		$ch = getch();		# 2nd byte. Alt + ?
 		if (ord($ch) == 171) {		# Alt-K
@@ -102,6 +103,10 @@ sub readakey {
 # This is slower than pressing Alt-x since when nothing is pressed curses waits 
 # 0.1 sec before sending chr(45). This is the halfdelay(1) setting in yfktest
 # Anyway, pressing one of the paddles also stops sending.
+#
+
+# ON4ACP 190901 Maybe we must try something like @ch = getch() or ($ch1,$ch2) = 
+# getch()... Then see if undef($ch2)
 #
 		elsif (ord($ch) == 45) {	# ON4ACP trying to catch 'ESC'
 			return 'esc';		# to interrupt morse sending
