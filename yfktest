@@ -330,7 +330,7 @@ $cwmessages[8] = 'SRI WKD B4'; 	# ON4ACP 190831 sorry, I think WKD is used more
    my $localIPbcast = substr($localIP,0,$lastbytepos+1)."255";
 
    $netsocket = IO::Socket::INET->new(
-                           PeerPort  => 12060,
+                           PeerPort  => 2333,
                            PeerAddr  => $localIPbcast,
                            Proto     => 'udp',
                            LocalAddr => $localIP,

@@ -63,6 +63,59 @@ sub logqso {
 			print $main::netsocket "YFK:".$logline;
 		}
 
+# ON4ACP 190902 Experiment with N1MM formatting
+$logline = '<?xml version="1.0" encoding="utf-8"?>
+ <contactinfo>
+   <contestname>DX</contestname>
+   <contestnr>0</contestnr>
+   <timestamp>2019-09-02 11:22:47</timestamp>
+   <mycall>MD/OP2D</mycall>
+   <band>14</band>
+   <rxfreq>1402000</rxfreq>
+   <txfreq>1402000</txfreq>
+   <operator>OP2D</operator>
+   <mode>CW</mode>
+   <call>ON6QB</call>
+   <countryprefix>ON</countryprefix>
+   <wpxprefix>ON6</wpxprefix>
+   <stationprefix>MD/OP2D</stationprefix>
+   <continent>EU</continent>
+   <snt>599</snt>
+   <sntnr>1</sntnr>
+   <rcv>599</rcv>
+   <rcvnr>0</rcvnr>
+   <gridsquare></gridsquare>
+   <exchange1></exchange1>
+   <section></section>
+   <comment></comment>
+   <qth></qth>
+   <name></name>
+   <power></power>
+   <misctext></misctext>
+   <zone>14</zone>
+   <prec></prec>
+   <ck>0</ck>
+   <ismultiplier1>0</ismultiplier1>
+   <ismultiplier2>0</ismultiplier2>
+   <ismultiplier3>0</ismultiplier3>
+   <points>1</points>
+   <radionr>1</radionr>
+   <RoverLocation></RoverLocation>
+   <RadioInterfaced>0</RadioInterfaced>
+   <NetworkedCompNr>0</NetworkedCompNr>
+   <IsOriginal>True</IsOriginal>
+   <NetBiosName>CW-PC</NetBiosName>
+   <IsRunQSO>1</IsRunQSO>
+   <StationName>CW-STATION</StationName>
+ </contactinfo>';
+
+print $main::netsocket $logline;
+
+$logline = '<command:3>Log <parameters:146><Band:3>20M <Call:5>M4HXM <Freq:6>14.076 <Mode:4>JT65 <QSO_DATE:8>20110419 <TIME_ON:6>184000 <RST_Rcvd:3>-03 <RST_Sent:3>-07 <TX_PWR:4>20.0 <EOR> ';
+
+print $main::netsocket $logline;
+
+
 #		$invalid = 0;
 		return 1;
 	}
