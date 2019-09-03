@@ -110,3 +110,10 @@ no changes added to commit
 pcara@latitude /movies/HAM/yfktest/yfktest-dx-pedition $ git commit -am "<your 
 message>"
 
+190903 Finally got it working! Managed to log into N1MM+
+Everything was fine but the bloody windows firewall (that I switched off 
+on the LAN) was doing something nasty. I could see my UDP packets come 
+in on WireShark but the were not picked up by N1MM+. Switching off the 
+Firewall on the WAN solved the problem. Very strange but I now realize 
+that Windows might mean "Windows network" (NetBIOS etc.) instead of LAN.
+
