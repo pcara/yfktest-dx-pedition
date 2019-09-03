@@ -14,6 +14,8 @@
 # * DONE: ESC key to stop sending CW (as alternative to Alt+x). See readakey.pl
 # * In the orig-latest, I get Subroutine main::getchar redefined at subs/dxcc.pl 
 #   line 2. Maybe have a look at this?
+# * How about adding Alt-t to tune radio for 6 seconds (or less with ESC) (or until you press any key)?
+#   winkeyerdeamon has the command built in. Just send c with the number of seconds...
 #
 sudo apt install libcurses-perl
 cd /mivies/HAM/yfktest
