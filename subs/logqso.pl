@@ -1,4 +1,5 @@
 load_subs("gettime.pl");
+load_subs("getlongtime.pl");	# ON4ACP 190904 for sending to N1MM+
 load_subs("getdate.pl");
 
 sub logqso {
@@ -30,6 +31,7 @@ sub logqso {
 		${$_[0]}{'nr'}++;
 
 		$qso{'utc'} = &gettime();
+		my $longtime = &getlongtime();	# ON4ACP 190904 for QSO boradcast
 		$qso{'date'} = &getdate();
 		$qso{'ops'} = $main::ops;
 
@@ -63,55 +65,48 @@ sub logqso {
 			print $main::netsocket "YFK:".$logline;
 		}
 
-# ON4ACP 190902 Experiment with N1MM formatting
-$logline = '<?xml version="1.0" encoding="utf-8"?>
- <contactinfo>
-   <contestname>DX</contestname>
-   <contestnr>0</contestnr>
-   <timestamp>2019-09-02 11:22:47</timestamp>
-   <mycall>MD/OP2D</mycall>
-   <band>14</band>
-   <rxfreq>1402000</rxfreq>
-   <txfreq>1402000</txfreq>
-   <operator>OP2D</operator>
-   <mode>CW</mode>
-   <call>ON6QB</call>
-   <countryprefix>ON</countryprefix>
-   <wpxprefix>ON6</wpxprefix>
-   <stationprefix>MD/OP2D</stationprefix>
-   <continent>EU</continent>
-   <snt>599</snt>
-   <sntnr>1</sntnr>
-   <rcv>599</rcv>
-   <rcvnr>0</rcvnr>
-   <gridsquare></gridsquare>
-   <exchange1></exchange1>
-   <section></section>
-   <comment></comment>
-   <qth></qth>
-   <name></name>
-   <power></power>
-   <misctext></misctext>
-   <zone>14</zone>
-   <prec></prec>
-   <ck>0</ck>
-   <ismultiplier1>0</ismultiplier1>
-   <ismultiplier2>0</ismultiplier2>
-   <ismultiplier3>0</ismultiplier3>
-   <points>1</points>
-   <radionr>1</radionr>
-   <RoverLocation></RoverLocation>
-   <RadioInterfaced>0</RadioInterfaced>
-   <NetworkedCompNr>0</NetworkedCompNr>
-   <IsOriginal>True</IsOriginal>
-   <NetBiosName>CW-PC</NetBiosName>
-   <IsRunQSO>1</IsRunQSO>
-   <StationName>CW-STATION</StationName>
- </contactinfo>';
+# ON4ACP 190904 making ADIF logline to send to N1MM+
 
-print $main::netsocket $logline;
+		$logline = "<CALL:".length($qso{'call'}).">".$qso{'call'}.' '; 
+		my $date = $main::qsos[$i]{'date'};
+                $date =~ s/-//g;
+                $logline = $logline."<QSO_DATE:8>".$date.' ';
+                $logline = $logline."<TIME_ON:6>".$longtime.' ';
+		$logline = $logline."<BAND:>".(length($qso{'band'})+1).'>'.$qso{'band'}."M  ";
+		if ($qso{'freq'}) {
+			$logline = $logline."<FREQ:".(length($qso{'freq'})).'>'.(($qso{'freq'} /=1000).' ');
+                }
+                my $mode = $qso{'mode'};
+                if ($mode eq 'P31') { $mode = 'PSK31'; }
+                if ($mode eq 'P63') { $mode = 'PSK63'; }
+                $logline = $logline."<MODE:".length($mode).'>'.$mode.'  ';
+                my $rst = '599';
+                if ($qso{'mode'} eq 'SSB') {
+                	$rst = ($main::truerst ? $qsos[$i]{'exc2'} : '59');	# ON4ACP                            else {
+                        }
+                if ($qso{'mode'} eq 'FM') {
+                                        $rst = '59';
+                        }
+		$logline = $logline "<RST_SENT:".length($rst).'>'.$rst.' ';
 
-$logline = '<command:3>Log <parameters:146><Band:3>20M <Call:5>M4HXM <Freq:6>14.076 <Mode:4>JT65 <QSO_DATE:8>20110419 <TIME_ON:6>184000 <RST_Rcvd:3>-03 <RST_Sent:3>-07 <TX_PWR:4>20.0 <EOR> ';
+                my $rstr = '599';
+                if ($qso{'mode'} eq 'SSB') {
+                	$rstr = ($main::truerst ? $qso[$i]{'exc3'} : '59');	# ON4ACP
+                }
+                if ($qso{'mode'} eq 'FM') {
+                        $rstr = '59';
+                }
+                $logline = $logline."<RST_RCVD:".length($rstr).'>'.$rstr.' ';
+
+                my $ops = 'OPER';
+                if ($qso{'ops'}) {$ops = $qso{'ops'};}
+                $logline = $logline."<OPERATOR:".length($ops).'>'.$ops.' ';
+
+#<COMMENT:>
+
+		$logline = $logline.'<EOR> ';
+
+		$logline = '<command:3>Log <parameters:'.length($logline).'>'.$logline;
 
 print $main::netsocket $logline;
 
