@@ -68,18 +68,24 @@ sub logqso {
 # ON4ACP 190904 making ADIF logline to send to N1MM+
 
 		$logline = "<CALL:".length($qso{'call'}).">".$qso{'call'}.' '; 
-		my $date = $main::qsos[$i]{'date'};
+
+		my $date = $qso{'date'};
                 $date =~ s/-//g;
                 $logline = $logline."<QSO_DATE:8>".$date.' ';
+
                 $logline = $logline."<TIME_ON:6>".$longtime.' ';
-		$logline = $logline."<BAND:>".(length($qso{'band'})+1).'>'.$qso{'band'}."M  ";
+
+		$logline = $logline."<BAND:>".(length($qso{'band'})+1).'>'.$qso{'band'}."M ";
+
 		if ($qso{'freq'}) {
 			$logline = $logline."<FREQ:".(length($qso{'freq'})).'>'.(($qso{'freq'} /=1000).' ');
                 }
+
                 my $mode = $qso{'mode'};
                 if ($mode eq 'P31') { $mode = 'PSK31'; }
                 if ($mode eq 'P63') { $mode = 'PSK63'; }
-                $logline = $logline."<MODE:".length($mode).'>'.$mode.'  ';
+                $logline = $logline."<MODE:".length($mode).'>'.$mode.' ';
+
                 my $rst = '599';
                 if ($qso{'mode'} eq 'SSB') {
                 	$rst = ($main::truerst ? $qsos[$i]{'exc2'} : '59');	# ON4ACP                            else {
@@ -87,7 +93,7 @@ sub logqso {
                 if ($qso{'mode'} eq 'FM') {
                                         $rst = '59';
                         }
-		$logline = $logline "<RST_SENT:".length($rst).'>'.$rst.' ';
+		$logline = $logline."<RST_SENT:".length($rst).'>'.$rst.' ';
 
                 my $rstr = '599';
                 if ($qso{'mode'} eq 'SSB') {

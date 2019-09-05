@@ -1,5 +1,6 @@
-sub gettime {	# ON4ACP 190904 time with seconds for sending to N1MM+, which 
-		# does not get a serial number for QSO
+sub getlongtime {	# ON4ACP 190904 time with seconds for sending to 
+			# N1MM+, which 
+			# does not get a serial number for QSO
     my @date = gmtime();        # $date[2] has hour, 1 has minutes, 0 has seconds
     if ($date[0] < 10) { $date[0] = "0".$date[0]; }   # Add 0 if neccessary
     if ($date[1] < 10) { $date[1] = "0".$date[1]; }

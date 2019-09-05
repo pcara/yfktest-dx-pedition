@@ -44,7 +44,8 @@ our $cwsocket;
 
 our $netsocket; #ON4ACP 190830 restore network QSO broadcast
 
-our $netname = "STN1";									# will be overridden later by found path
+our $netname = "YFKSTN1";									
+# will be overridden later by found path
 our $contestpath = "defs/";
 
 load_subs("newcontest.pl");
@@ -83,6 +84,10 @@ load_subs("setconfigs.pl");
 load_subs("whichlogfile.pl");
 load_subs("sendvoice.pl");
 
+# ON4ACP A few additions requested by our club members for UBA fieldday
+load_subs("showqsonr.pl");# ON4ACP big QSO number if toilet is installed
+load_subs("showubalist.pl");# ON4ACP show remaining 10-point stations
+
 
 our $version = "0.0.10";
 
@@ -119,6 +124,8 @@ our $fixexchangename='';								# what to ask the user for, like "IOTA-Ref:"?
 our $exc1s = '';									# actual value of the fixed exchange value
 our $exc2s = '';
 our $exc3s = '';
+
+our $offset=1;# ON4ACP for consecutive dupes when not rescoring
 
 our $tmp='';
 
@@ -189,13 +196,14 @@ our %qso = (										# The current QSO
 		'rst' => '599',
 		'excs' => '',								# sent exchange
 		'exc1' => '',
-		'exc2' => '',
-		'exc3' => '',
+		'exc2' => '59',	# ON4ACP for truerst
+		'exc3' => '59', # ON4ACP for truerst
 		'exc4' => '',
-		'band' => '20',
+		'band' => '40', # ON4ACP default to 40 for in case you are RESTRICTED
 		'freq' => '',
-		'mode' => 'CW',
-#		'mode' => 'SSB',							# for testing $cqrepeat stuff
+#		'mode' => 'CW',
+		'mode' => 'SSB',	# ON4ACP for SSB fieldday							
+# for testing $cqrepeat stuff
 		'stn' => $netname ,
 		'ops' => ''
 );
@@ -205,7 +213,7 @@ our %qso = (										# The current QSO
 our %tmpqso;										# current Q will be saved here while editing prev QSOs
 
 our $mycont='EU';									# Will change these two variables later as needed.
-our $mydxcc='DL';
+our $mydxcc='ON';	# ON4ACP This probably gets changed automatically later but just to make sure...
 
 our $cqinterval='10';									# from the start of cq to the start of the next cq
 our $cqrepeat=0;									# set/unset (a toggle) to repeat
@@ -245,9 +253,11 @@ For the latest info on this: you can read the docs/FAQ-NEW-INFO file.
 screen & the program will stop asking about this when you start it !
 
 ***** FIFTH - Here's an example of how to start yfktest & auto-load an
-existing log (FD for instance); yfktest ARRL-FD.yfk (& press <enter>.)
+existing log (FD for instance); ./yfktest ARRL-FD.yfk (& press <enter>.)
 
 ***********  That's it ! - Press the ENTER key & begin using yfktest.";
+
+# ON4ACP Changed yfktest into ./yfktest in the text above.
 
 getch();
 
@@ -267,10 +277,11 @@ my @tmp = &dxcc($mycall);
 
 if ($modes eq 'SSB') {
 	$qso{'mode'} = 'SSB';
-	$qso{'rst'} = '59';
+	if ($contest eq 'UBA-FD') {our $truerst = 1; $qso{'exc2'}='59'; $qso{'exc3'}='59';}# ON4ACP
+
 }
 
-($qso{'band'} = $bands) =~ s/[MG]$// if ($bands ne 'ALL');
+($qso{'band'} = $bands) =~ s/[MG]$// if (($bands ne 'ALL') && ($bands ne 'RESTRICTED')); #ON4ACP also no band in RESTRICTED put default to 40 on line 186
 
 if ($exc1s =~ /\//) {
 	my $fix = $exc1s;
@@ -290,7 +301,7 @@ if ($exc1s =~ /\//) {
 
 	$cwsocket = IO::Socket::INET->new(PeerAddr => "localhost",
 		PeerPort => "6789", Proto    => "udp", Type     => SOCK_DGRAM)
-		or die "Cannot open socket for CWdaemon.\n";
+		or die "Cannot open socket for CWdaemon.\n";	# ON4ACP removed a comma after SOCK_DGRAM
 
 print $cwsocket chr(27)."2$cwspeed";
 
@@ -355,11 +366,16 @@ if ($contest eq "ARRL-FD"){
 our $wmain = newwin(24,80,0,0);
 attron($wmain, COLOR_PAIR(3));
 addstr($wmain, 0,0, ' 'x(24*80));
-addstr($wmain, 23, 0, "     Logging Mode                              ALT+o/h:Help ");
+addstr($wmain, 23, 0, "     Logging Mode                             ALT+o/h:Help ");	# ON4ACP removed a space before ALT
 refresh($wmain);
 
 our $wcheck = newwin(($contest eq 'DXPED' ? 10 : 7), 38,0,0);
 attron($wcheck, COLOR_PAIR(4));
+if ($bands eq 'RESTRICTED'){ # ON4ACP Only 3 bands needed => can make room for rates and CW-spd
+        $wcheck = newwin(4,38,0,0);
+}
+addstr($wcheck,0,0, ' 'x380);	# ON4ACP
+refresh($wcheck);	# ON4ACP
 
 our $winfo = newwin(($contest eq 'DXPED' ? 3 : 6), 35, 
 	($contest eq 'DXPED' ?  11 : 8),0);
@@ -370,23 +386,61 @@ refresh($winfo);
 our $wshowscore = newwin(10,21,14,59);
 our $wpartialcheck = newwin(9,40,0,39);
 
-if ($contest eq "ARRL-FD"){
-	$winfo = newwin(6,47,8,0);
+if ($contest eq "ARRL-FD"){	# ON4ACP changed a bit since UBA filedday is a lot like ARRL-FD
+	$winfo = newwin(6,45,8,0);	# ON4ACP was 47 instead of 45
 	attron($winfo, COLOR_PAIR(4));
-	addstr($winfo, 0,0, ' 'x(6*47));
+	addstr($winfo, 0,0, ' 'x(6*45));	# ON4ACP was 47 instead of 45
 	refresh($winfo); 
 	
-	$wshowscore = newwin(10,21,14,59);
+#	$wshowscore = newwin(10,21,14,59);	# ON4ACP removed this. 
+						# Will be replaced by smaller score window. See below...
 	$wpartialcheck = newwin(7,40,0,39);
 
-	addstr($wmain, 9, 48, "$contest");
+#	addstr($wmain, 9, 48, "$contest");	# ON4ACP removed this. 
+						# Name of contest will appear elsewhere
 }
+
+if ($contest eq "UBA-FD"){# ON4ACP make room for big window with participating stations
+        $winfo = newwin(6,63,8,0);
+        attron($winfo, COLOR_PAIR(4));
+        addstr($winfo, 0,0, ' 'x(6*63));
+        refresh($winfo);
+        &showubalist(\$winfo,\%qso);
+        $wpartialcheck = newwin(7,40,0,39);
+}
+
+if ($bands eq 'RESTRICTED'){# ON4ACP No need for big window when only using 3 bands
+        $wshowscore = newwin(8,21,16,59);
+}
+
+# ON4ACP 190905 Maybe there is a showscore window missing in ARRL-FD 
+# now. Ooops. Esay to fix but must be done!
+# Not sure if I still use ARRL-FD now ;-) Maybe those changes date from 
+# before UBA-FD and can actually be reversed?
 
 our $wrate = newwin(4, 16, 10, 62);
 attron($wrate, COLOR_PAIR(4));
 addstr($wrate, 0,0, "   QSO Rates:   ");
 addstr($wrate, 1,0, " "x66);
 addstr($wrate, 3,0, "  CW-Speed: $cwspeed");
+
+our $wqsonr = 0;	# ON4ACP
+
+if ($bands eq 'RESTRICTED'){# ON4ACP No need for big check call window when only on 3 bands, can move rates and speed there and make space for big qso number
+    $wrate = newwin(2, 38, 5, 0);
+    attron($wrate, COLOR_PAIR(4));
+    addstr($wrate, 0,0, " "x76);
+    addstr($wrate, 0,0, "QSO Rates:  ");
+    if ($qso{'mode'} eq 'CW') {# ON4ACP
+        addstr($wrate, 0,26, "  CW-Spd: $cwspeed");}
+    $wqsonr = newwin(3,10,10,66);
+    attron($wqsonr, COLOR_PAIR(4));
+    addstr($wqsonr, 0,0, " "x999);
+    our $hastoilet=0;# ON4ACP for big fonts QSO number
+    if (`which toilet`) {$hastoilet=1}
+    &showqsonr(\$wqsonr, \%qso);
+}
+
 refresh($wrate);
 
 my $ch='';
@@ -399,8 +453,15 @@ my $ch='';
 &checkcall(\$wcheck, \@qsos, 'blabla');
 
 if (length ($ops) > 13) {$ops = substr $ops, 0, 13;}
-if ($ops) {addstr($wmain, 9, 62, "Op: $ops");}
-unless (($contest eq 'DXPED') || ($contest eq 'ARRL-FD')) {addstr($wmain, 9, 46, "$contest");}
+if ($ops) {addstr($wmain, 9, 59, "Op: $ops  [ALT+p]");} # ON4ACP Added ALT-p shortcut
+unless (($contest eq 'DXPED')||($contest eq 'UBA-FD')) {addstr($wmain, 
+9, 46, "$contest");}
+if ($contest eq 'UBA-FD') {addstr($wmain, 8, 66, "$contest");}# ON4ACP moving with the layout a little so we can get big qso numbers
+
+# ON4ACP Old code was
+# if ($ops) {addstr($wmain, 9, 62, "Op: $ops");}
+# unless (($contest eq 'DXPED') || ($contest eq 'ARRL-FD')) {addstr($wmain, 9, 46, "$contest");}
+# So maybe again something happened to ARRL-FD...
 
 my $oldband = $qso{'band'};								# used to insure cqrepeats are requested anew
 my $oldmode = $qso{'mode'};                                                             #    after band or mode changes
@@ -433,7 +494,7 @@ while (1) {										# begin main logging loop
 			&partialcheck(\$wpartialcheck, \%qso, \@qsos, \@scp);
 			&checkcall(\$wcheck, \@qsos, $qso{'call'});
 			&dupecheck(\$wmain, \%qso, \@qsos) unless $editnr;
-			&callinfo();
+			&callinfo() unless ($contest eq 'UBA-FD');	# ON4ACP
 		}
 		$oldcall = $qso{'call'};
 		$oldeditnr = $editnr;
@@ -479,6 +540,14 @@ while (1) {										# begin main logging loop
 				&wipeqso(\%qso, \$curpos, \$activefield);
 				$oldtime = (time + 2);
 			}
+			elsif ($ch eq 'opchange') {	# ON4ACP
+                                attron($wmain, COLOR_PAIR(6));
+                                addstr($wmain, 9, 59, "Op: ");
+                                $ops = &readw(\$wmain, 9, 63, 'call', $ops);
+                                attron($wmain, COLOR_PAIR(3));
+                                addstr($wmain, 9, 59, "Op: $ops  [ALT+p]");
+                        }
+
 			elsif ($ch eq 'help' || $ch eq 'rate' || $ch eq 'config') {	# alt-h or alt-r or alt-c
 
 				if ($ch eq 'help') { &showhelp(); }
@@ -499,23 +568,33 @@ while (1) {										# begin main logging loop
 						\%s_dupes, $s_sum);
 				&rate(\$wrate, \@qsos);
 				&checkcall(\$wcheck, \@qsos, $qso{'call'});
-				&callinfo();
-				if ($ops) {
-					addstr($wmain, 9, 62, "                 ");
-					if (length ($ops) > 13) {
-						$ops = substr $ops, 0, 13;
-					}
-					addstr($wmain, 9, 62, "Op: $ops");
-				}else{
-					addstr($wmain, 9, 62, "                 ");
-				}
+				&callinfo() unless ($contest eq 'UBA-FD');	#ON4ACP
+				if ($ops) {	# ON4ACP
+                                        addstr($wmain, 9, 62, "                 ");
+                                        if (length ($ops) > 13) {
+                                                $ops = substr $ops, 0, 13;
+                                        }
+                                        addstr($wmain, 9, 59, "Op: $ops  [ALT+p]");
+                                }else{
+                                        addstr($wmain, 9, 62, "                 ");
+                                }
+# ON4ACP Old code was
+#				if ($ops) {
+#					addstr($wmain, 9, 62, "                 ");
+#					if (length ($ops) > 13) {
+#						$ops = substr $ops, 0, 13;
+#					}
+#					addstr($wmain, 9, 62, "Op: $ops");
+#				}else{
+#					addstr($wmain, 9, 62, "                 ");
+#				}
 			}
 			elsif ($ch eq 'keyboard') {					# Alt-k
 				&keyboardmode() if ($qso{'mode'} eq 'CW');
 			}
 			elsif ($ch eq 'cwmessages') {					# Alt-m
 				&editcwmessages(\$wcheck);
-				addstr($wmain, 23, 0, "     Logging Mode                              ALT+o/h:Help ");
+				addstr($wmain, 23, 0, "     Logging Mode                             ALT+o/h:Help ");	# ON4ACP removed a space before ALT
 				&checkcall(\$wcheck, \@qsos, 'blabla');
 				&checkcall(\$wcheck, \@qsos, $qso{'call'});
 			}
@@ -523,6 +602,7 @@ while (1) {										# begin main logging loop
 			elsif (($ch eq 'log' && (!$nologdupe or !$dupe)) || ($ch eq 'override' && $dupe)){
 				if (!$editnr){
 					&qsy(\%qso, \$curpos);				# check for: '20M', 'SSB', '21025' etc.
+					&showubalist(\$winfo,\%qso) if ($contest eq 'UBA-FD');# ON4ACP
 				}
 				if ($qso{'call'} eq 'QUIT') {
 					endwin;
@@ -549,9 +629,12 @@ while (1) {										# begin main logging loop
 					else {
 					&scoreqso(\%qso, \@qsos, \%s_qsos, \%s_qsopts, \%s_mult1,
 							\%s_mult2, \%s_dupes, \$s_sum);
+					&showubalist(\$winfo,\%qso) if ($contest eq 'UBA-FD');# ON4ACP
 					}
-					addstr($wmain,22,35,"                                  ");
+# ON4ACP Why is this here?		addstr($wmain,22,35,"                                  ");
 					&wipeqso(\%qso, \$curpos, \$activefield);
+					if ($bands eq 'RESTRICTED'){	# ON4ACP
+						&showqsonr(\$wqsonr,\%qso);}
 					$oldtime = (time + 2);
 				}
 				elsif ($editnr && &logeditqso()) {	# edit old QSO
