@@ -1,0 +1,73 @@
+YFKtest
+DXPED
+MD/OP2D
+ASSISTED
+ALL
+CW
+MULTI-OP
+HIGH
+LIMITED
+
+CQ MYCALL MYCALL
+5NN EXC1S
+TU MYCALL
+MYCALL
+HISCALL
+NR?
+?
+1   ;20 ;         ; CW;1631;2019-08-31;ON6QB       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+2   ;20 ;         ; CW;1631;2019-08-31;ON4CKM      ;      ;      ;      ;      ;STN1  ;ON4ACP         
+3   ;20 ;         ; CW;1637;2019-08-31;ON4ANN      ;      ;      ;      ;      ;STN1  ;ON4ACP         
+4   ;20 ;         ; CW;1637;2019-08-31;SP2EZY      ;      ;      ;      ;      ;STN1  ;ON4ACP         
+5   ;20 ;         ; CW;1637;2019-08-31;TM6NB       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+6   ;20 ;         ; CW;1639;2019-08-31;OP2A        ;      ;      ;      ;      ;STN1  ;ON4ACP         
+7   ;20 ;         ; CW;1640;2019-08-31;OO9O        ;      ;      ;      ;      ;STN1  ;ON4ACP         
+8   ;20 ;         ; CW;1643;2019-08-31;ZS4BS       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+9   ;20 ;         ; CW;1643;2019-08-31;ON6HM       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+10  ;20 ;         ; CW;1645;2019-08-31;ON4TA       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+11  ;20 ;         ; CW;1645;2019-08-31;OH2BH       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+12  ;20 ;         ; CW;1652;2019-08-31;N2NI        ;      ;      ;      ;      ;STN1  ;ON4ACP         
+13  ;20 ;         ; CW;1652;2019-08-31;ON7TK       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+14  ;20 ;         ; CW;1801;2019-08-31;ON7EH       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+15  ;20 ;         ; CW;1801;2019-08-31;ON8CW       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+16  ;20 ;         ; CW;1802;2019-08-31;ON7DE       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+17  ;20 ;         ; CW;1802;2019-08-31;ON4DKP      ;      ;      ;      ;      ;STN1  ;ON4ACP         
+18  ;20 ;         ; CW;1056;2019-09-01;ON5PDV      ;      ;      ;      ;      ;STN1  ;ON4ACP         
+19  ;20 ;         ; CW;1056;2019-09-01;OT70NBT     ;      ;      ;      ;      ;STN1  ;ON4ACP         
+20  ;20 ;         ; CW;1136;2019-09-01;ON4CAJ      ;      ;      ;      ;      ;STN1  ;ON4ACP         
+21  ;20 ;         ; CW;1136;2019-09-01;ON6NB       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+22  ;20 ;         ; CW;1137;2019-09-01;ON6QB       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+23  ;20 ;         ; CW;1137;2019-09-01;OK1CRJ      ;      ;      ;      ;      ;STN1  ;ON4ACP         
+24  ;20 ;         ; CW;1153;2019-09-01;N1MM        ;      ;      ;      ;      ;STN1  ;ON4ACP         
+25  ;20 ;         ; CW;1153;2019-09-01;LZ1WR       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+26  ;20 ;         ; CW;1154;2019-09-01;ON4CCV      ;      ;      ;      ;      ;STN1  ;ON4ACP         
+27  ;20 ;         ; CW;1236;2019-09-01;OP0PPY      ;      ;      ;      ;      ;STN1  ;ON4ACP         
+28  ;20 ;         ; CW;1236;2019-09-01;F4WBY       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+29  ;20 ;         ; CW;1239;2019-09-01;P5ACP       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+30  ;20 ;         ; CW;1239;2019-09-01;K1N         ;      ;      ;      ;      ;STN1  ;ON4ACP         
+31  ;20 ;         ; CW;1239;2019-09-01;ON2LVC      ;      ;      ;      ;      ;STN1  ;ON4ACP         
+32  ;20 ;         ; CW;1239;2019-09-01;ON3CW       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+33  ;20 ;         ; CW;1239;2019-09-01;ON3BI       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+34  ;20 ;         ; CW;1240;2019-09-01;ON2LVC      ;      ;      ;      ;      ;STN1  ;ON4ACP         
+35  ;20 ;         ; CW;1302;2019-09-01;ON7TA       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+36  ;20 ;         ; CW;1303;2019-09-01;ON6LC       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+37  ;20 ;         ; CW;1303;2019-09-01;OT5A        ;      ;      ;      ;      ;STN1  ;ON4ACP         
+38  ;20 ;         ; CW;1308;2019-09-01;ON1KZZ      ;      ;      ;      ;      ;STN1  ;ON4ACP         
+39  ;20 ;         ; CW;1308;2019-09-01;ON5ND       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+40  ;20 ;         ; CW;1309;2019-09-01;ON4LEC      ;      ;      ;      ;      ;STN1  ;ON4ACP         
+41  ;20 ;         ; CW;1742;2019-09-01;ON1KDL      ;      ;      ;      ;      ;STN1  ;ON4ACP         
+42  ;20 ;         ; CW;1743;2019-09-01;ON7RN       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+43  ;20 ;         ; CW;1744;2019-09-01;ON7RU       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+44  ;20 ;         ; CW;1744;2019-09-01;OR5EEC      ;      ;      ;      ;      ;STN1  ;ON4ACP         
+45  ;20 ;         ; CW;1744;2019-09-01;OP4K        ;      ;      ;      ;      ;STN1  ;ON4ACP         
+46  ;20 ;         ; CW;1746;2019-09-01;ON4OK       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+47  ;20 ;         ; CW;1746;2019-09-01;ON7TW       ;      ;      ;      ;      ;STN1  ;ON4ACP         
+48  ;20 ;         ; CW;1747;2019-09-01;JA5AQC      ;      ;      ;      ;      ;STN1  ;ON4ACP         
+49  ;20 ;         ; CW;1752;2019-09-01;ON4AAQ      ;      ;      ;      ;      ;STN1  ;ON4ACP         
+50  ;20 ;         ; CW;1752;2019-09-01;ON4DTO      ;      ;      ;      ;      ;STN1  ;ON4ACP         
+51  ;20 ;         ; CW;1752;2019-09-01;G5RV        ;      ;      ;      ;      ;STN1  ;ON4ACP         
+52  ;20 ;         ; CW;1752;2019-09-01;G5LP        ;      ;      ;      ;      ;STN1  ;ON4ACP         
+53  ;20 ;         ; CW;1507;2019-09-07;ON7TD       ;      ;      ;      ;      ;YFKSTN1;ON4ACP         
+54  ;20 ;         ; CW;1507;2019-09-07;DL2FTR      ;      ;      ;      ;      ;YFKSTN1;ON4AAQ         
+55  ;20 ;         ; CW;0441;2019-09-09;OM7L        ;      ;      ;      ;      ;YFKSTN1;ON4AAQ         
+56  ;20 ;         ; CW;1842;2019-09-15;SV5AGN      ;      ;      ;      ;      ;YFKSTN1;ON4AAQ         

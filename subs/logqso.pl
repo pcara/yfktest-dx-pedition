@@ -75,7 +75,7 @@ sub logqso {
 
                 $logline = $logline."<TIME_ON:6>".$longtime.' ';
 
-		$logline = $logline."<BAND:>".(length($qso{'band'})+1).'>'.$qso{'band'}."M ";
+		$logline = $logline."<BAND:".(length($qso{'band'})+1).'>'.$qso{'band'}."M ";
 
 		if ($qso{'freq'}) {
 			$logline = $logline."<FREQ:".(length($qso{'freq'})).'>'.(($qso{'freq'} /=1000).' ');
