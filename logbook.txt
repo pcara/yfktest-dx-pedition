@@ -8,14 +8,18 @@
 
 #C My ambition is to get at least the following things done. Many of them I have 
 #  already done in the past.
-# * change operator with Alt+p. See readakey.pl and yfktest
-# * put a frequency on 60m for correct Cabrillo and ADIF output. See writelog.pl
-# * get QSO info broadcast over local network. See logqso.pl and yfktest
+# * DONE change operator with Alt+p. See readakey.pl and yfktest
+# * DONE put a frequency on 60m for correct Cabrillo and ADIF output. See writelog.pl
+# * DONE get QSO info broadcast over local network. See logqso.pl and yfktest
 # * DONE: ESC key to stop sending CW (as alternative to Alt+x). See readakey.pl
 # * In the orig-latest, I get Subroutine main::getchar redefined at subs/dxcc.pl 
-#   line 2. Maybe have a look at this?
+#   line 2. Maybe have a look at this? This error has disappeared but I don't 
+#   know why.
 # * How about adding Alt-t to tune radio for 6 seconds (or less with ESC) (or until you press any key)?
 #   winkeyerdeamon has the command built in. Just send c with the number of seconds...
+# * When starting yfktest reads the log and gives the red-background "status 
+#   bar", then draws the logging window. The "status bar" stays on the screen. 
+#   Maybe clear screen before drawing logging window?
 #
 sudo apt install libcurses-perl
 cd /mivies/HAM/yfktest
