@@ -1,2 +1,5 @@
 sudo tcpdump -i lo -n udp port 12060 -X
+sudo tcpdump -i wlp2s0 -n udp port 12060 -X
+lsof -i -P -n
+sudo nmap -sU -O 192.168.1.111
 

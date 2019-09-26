@@ -20,6 +20,17 @@
 # * When starting yfktest reads the log and gives the red-background "status 
 #   bar", then draws the logging window. The "status bar" stays on the screen. 
 #   Maybe clear screen before drawing logging window?
+# * +/-DONE 190926: More or less works. When you press F1, it now "runs" 
+#   and keeps running until you press F1 again. In this mode, "ESC" stops 
+#   sending but after cqinterval it starts again until you press F1. Next time 
+#   you press F1,  it will again run. To go back to normal mode, prees ALT+E. 
+#   Don't know if an  indication is needed for this mode. I don't think so. You 
+#   see it when you press  F1. Also When changing speed or typing backspace in 
+#   Running mode, it seems that  the run stops after ending the current message. 
+#   To resume Running mode, press F1  (to go to Logging mode) and then F1 again 
+#   to run again. Don't see how to fix it  but let's call it a known bug ;-) 
+#   Maybe make a CQ repeat feature with ALT+E ? My Peppermint emphasizes the  
+#   mouse pointer when you ALT+c :-( 
 #
 sudo apt install libcurses-perl
 cd /mivies/HAM/yfktest

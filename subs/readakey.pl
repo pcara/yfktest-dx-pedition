@@ -36,6 +36,9 @@ sub readakey {
 		elsif (ord($ch) == 163) {	# alt-c = set configs screen
 			return 'config';
 		}
+		elsif (ord($ch) == 165) {	# ON4ACP 190926 alt-e = toggle CQ repeat
+			return 'togglecqrep';
+		}
 		elsif (ord($ch) == 168) {	# alt-h = help screen
 			return 'help';
 		}
@@ -74,6 +77,9 @@ sub readakey {
 		}
 		elsif (ord($ch) == 99) {		# Alt-c
 			return 'config';
+		}
+		elsif (ord($ch) == 101) {	# ON4ACP 190926 alt-e = toggle CQ repeat
+			return 'togglecqrep';
 		}
 		elsif (ord($ch) == 114) {		# Alt-r
 			return 'rate';
@@ -126,7 +132,10 @@ sub readakey {
 	} 
 	elsif (ord($ch) == 227) {	# Alt-c -> set configs screen
 		return 'config';
-	} 
+	}
+	elsif (ord($ch) == 229) {	# ON4ACP 190926 alt-e = toggle CQ repeat
+		return 'togglecqrep';
+	}
 	elsif (ord($ch) == 242) {	# Alt-r -> Rate Graph
 		return 'rate';
 	} 

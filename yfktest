@@ -547,7 +547,17 @@ while (1) {										# begin main logging loop
                                 attron($wmain, COLOR_PAIR(3));
                                 addstr($wmain, 9, 59, "Op: $ops  [ALT+p]");
                         }
-
+			elsif ($ch eq 'togglecqrep') {	# ON4ACP 190926
+			    if ($wantcqrepeat == 0) {
+				$wantcqrepeat = 1;
+#			        attron($wmain,COLOR_PAIR(6));
+#				addstr($wmain,23,5,"Running");
+			    }
+			    else {
+				$wantcqrepeat = 0;
+#				addstr($wmain,23,5,"Logging");
+			    }
+			}    
 			elsif ($ch eq 'help' || $ch eq 'rate' || $ch eq 'config') {	# alt-h or alt-r or alt-c
 
 				if ($ch eq 'help') { &showhelp(); }
