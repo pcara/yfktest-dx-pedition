@@ -524,15 +524,15 @@ while (1) {										# begin main logging loop
 
 		if ($ch ne 'ok') {							# some special key/function pressed
 			if (!$editnr && ($ch =~ /^(f\d|ins|esc|plus|pgup|pgdwn)$/)) {
-				if ($ch eq 'f1' && $wantcqrepeat) {
+			    if ($ch eq 'f1' && $wantcqrepeat) {                         # press F1 again to stop repeating CQ
 					($cqrepeat == 0) ? ($cqrepeat = 1) : ($cqrepeat = 0);
 					if (!$cqrepeat) { &sendcw('esc');}
-					$oldtime = time;
+					$oldtime = time;  # to start calling CQ immediately after pressing F1 (see if-statement just above)
 				}
 				else {
 					if (!$wantcqrepeat) { $cqrepeat = 0; }
-					if ($ch eq 'esc') { $oldtime = time + ($cqinterval / 2); }
-					else { $oldtime = (time + 100); }
+					if ($ch eq 'esc') { $oldtime = time + ($cqinterval / 2); }   # ESC interrupts repeating CQ momentarily
+					else { $oldtime = (time + 100); }  # Another key interrupts for 100 (seconds ?)
 					&sendcw($ch);
 				}
 			}
@@ -550,13 +550,15 @@ while (1) {										# begin main logging loop
 			elsif ($ch eq 'togglecqrep') {	# ON4ACP 190926
 			    if ($wantcqrepeat == 0) {
 				$wantcqrepeat = 1;
-#			        attron($wmain,COLOR_PAIR(6));
-#				addstr($wmain,23,5,"Running");
+			        attron($wmain,COLOR_PAIR(6));
+				addstr($wmain,23,0,"R");
 			    }
 			    else {
 				$wantcqrepeat = 0;
-#				addstr($wmain,23,5,"Logging");
+				attron($wmain,COLOR_PAIR(6));
+				addstr($wmain,23,0,"L");
 			    }
+			    refresh($wmain);
 			}    
 			elsif ($ch eq 'help' || $ch eq 'rate' || $ch eq 'config') {	# alt-h or alt-r or alt-c
 
