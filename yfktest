@@ -532,8 +532,8 @@ while (1) {										# begin main logging loop
 				else {
 					if (!$wantcqrepeat) { $cqrepeat = 0; }
 					if ($ch eq 'esc') { $oldtime = time + ($cqinterval / 2); }   # ESC interrupts repeating CQ momentarily
-					else { $oldtime = (time + 100); }  # Another key interrupts for 100 (seconds ?)
-					&sendcw($ch);
+# ON4ACP 191002 removed		        else { $oldtime = (time + 100); }  # Another key interrupts for 100 (seconds ?)
+					&sendcw($ch);  # Send whatever key was pressed or change speed (so you are not supposed to change speed during autoCQ...) BUT I removed the previous line so that now it should work
 				}
 			}
 			elsif ($ch eq 'wipe') {						# Alt-w, F11
@@ -550,15 +550,15 @@ while (1) {										# begin main logging loop
 			elsif ($ch eq 'togglecqrep') {	# ON4ACP 190926
 			    if ($wantcqrepeat == 0) {
 				$wantcqrepeat = 1;
-			        attron($wmain,COLOR_PAIR(6));
-				addstr($wmain,23,0,"R");
+#			        attron($wmain,COLOR_PAIR(6));
+#				addstr($wmain,23,0,"R");
 			    }
 			    else {
 				$wantcqrepeat = 0;
-				attron($wmain,COLOR_PAIR(6));
-				addstr($wmain,23,0,"L");
+#				attron($wmain,COLOR_PAIR(6));
+#				addstr($wmain,23,0,"L");
 			    }
-			    refresh($wmain);
+#			    refresh($wmain);  # ON4ACP 191002 The visual does not work and is not needed
 			}    
 			elsif ($ch eq 'help' || $ch eq 'rate' || $ch eq 'config') {	# alt-h or alt-r or alt-c
 

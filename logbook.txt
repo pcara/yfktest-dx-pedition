@@ -20,15 +20,22 @@
 # * When starting yfktest reads the log and gives the red-background "status 
 #   bar", then draws the logging window. The "status bar" stays on the screen. 
 #   Maybe clear screen before drawing logging window?
-# * +/-DONE 190926: More or less works. When you press F1, it now "runs" 
+# * DONE 191002: When you press F1, it now "runs" 
 #   and keeps running until you press F1 again. In this mode, "ESC" stops 
-#   sending but after cqinterval it starts again until you press F1. Next time 
+#   sending but after cqinterval it starts again until you press F1 to stop it 
+#   running. Next time 
 #   you press F1,  it will again run. To go back to normal mode, prees ALT+E. 
 #   Don't know if an  indication is needed for this mode. I don't think so. You 
-#   see it when you press  F1. Also When changing speed or typing backspace in 
+#   see it when you press  F1. [FIXED 191002:Also When changing speed or typing 
+#   backspace in 
 #   Running mode, it seems that  the run stops after ending the current message. 
-#   To resume Running mode, press F1  (to go to Logging mode) and then F1 again 
-#   to run again. Don't see how to fix it  but let's call it a known bug ;-) 
+#   [191002 This was fixed by removing the lins with $oldtime = (time + 100)]]
+#   While in running mode you can type calls, make QSOs, ... Once logged, the 
+#   auto-CQ will resume. Neat feature!
+#   If you change mode or band auto-CQ will stop. You must press F1 again to 
+#   start running.
+#   While programming this I discovered a net feature: to make QSO I usually 
+#   press F5 (HISCALL), then F2 (EXCH). A shortcut for that is the 'INS'-key.
 #   Maybe make a CQ repeat feature with ALT+E ? My Peppermint emphasizes the  
 #   mouse pointer when you ALT+c :-( 
 #

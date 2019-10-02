@@ -13,7 +13,7 @@ sub sendcw {
 	}
 	elsif ($c eq 'ins') {
 		print $main::cwsocket
-			"$main::qso{'call'} ".&cwmsg($main::cwmessages[1]).' ';
+			"$main::qso{'call'} ".&cwmsg($main::cwmessages[1]).' ';  # This is the F2 message!
 	}
 	elsif ($c eq 'pgup') {
 		$main::cwspeed+=2 unless $main::cwspeed > 59;
