@@ -8,5 +8,5 @@ nologdupe=1
 colorscheme=1
 showmsgkeys=1
 ops=ON4ACP
-wantcqrepeat=1
+wantcqrepeat=0
 cqinterval=8

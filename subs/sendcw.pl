@@ -6,7 +6,11 @@ sub sendcw {
 	print $main::cwsocket chr(27)."2$main::cwspeed";
 	
 	if ($c eq 'esc') {
-		print $main::cwsocket chr(27)."4";
+	    print $main::cwsocket chr(27)."4";
+	    if ($main::tuning) {# ON4ACP 191018 to keep keyer in sync with yfk when aborting tuning.
+		print $main::cwsocket chr(27)."c";
+		$main::tuning = 0;
+	    }
 	}
 	if ($c =~ /f(\d)/) {
 		print $main::cwsocket &cwmsg($main::cwmessages[$1-1]).' ';
@@ -27,8 +31,10 @@ sub sendcw {
 		print $main::cwsocket chr(27)."2$main::cwspeed";
 		addstr($main::wrate, 3,0, "  CW-Speed: $main::cwspeed");
 		refresh($main::wrate);
+      	}
+	elsif ($c eq 'tune') {
+	    print $main::cwsocket chr(27)."c";
 	}
-
 }
 
 

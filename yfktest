@@ -43,6 +43,7 @@ our $hamlibrigd;
 our $cwsocket;
 
 our $netsocket; #ON4ACP 190830 restore network QSO broadcast
+our $tuning = 0; # ON4ACP 191018 to keep track of tuning status of keyer so that When interrupting with 'esc' we can also reset the keyer.
 
 our $netname = "YFKSTN1";									
 # will be overridden later by found path
@@ -539,6 +540,10 @@ while (1) {										# begin main logging loop
 			elsif ($ch eq 'wipe') {						# Alt-w, F11
 				&wipeqso(\%qso, \$curpos, \$activefield);
 				$oldtime = (time + 2);
+			}
+			elsif ($ch eq 'tune') {	# ON4ACP tune on/off
+			    $tuning = $tuning ^ 1;# ^ stands for XOR
+					&sendcw('tune');
 			}
 			elsif ($ch eq 'opchange') {	# ON4ACP
                                 attron($wmain, COLOR_PAIR(6));

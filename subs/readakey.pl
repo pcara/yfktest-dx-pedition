@@ -48,6 +48,9 @@ sub readakey {
 		elsif (ord($ch) == 178) {	# alt-r = rate screen
 			return 'rate';
 		}
+		elsif (ord($ch) == 180) {	# alt-t = tune on/off
+		        return 'tune';          # Added by ON4ACP
+		}
 		elsif (ord($ch) == 172) {	# alt-l = rate screen
 			return 'override';
 		}
@@ -83,6 +86,9 @@ sub readakey {
 		}
 		elsif (ord($ch) == 114) {		# Alt-r
 			return 'rate';
+		}
+		elsif (ord($ch) == 116) {		# Alt-t ON4ACP
+			return 'tune';
 		}
 		elsif (ord($ch) == 108) {		# Alt-l
 			return 'override';
@@ -138,6 +144,9 @@ sub readakey {
 	}
 	elsif (ord($ch) == 242) {	# Alt-r -> Rate Graph
 		return 'rate';
+	} 
+	elsif (ord($ch) == 244) {	# Alt-t -> tune on/off
+		return 'tune';
 	} 
 	elsif (ord($ch) == 236) {	# Alt-l -> Rate Graph
 		return 'override';

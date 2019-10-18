@@ -30,6 +30,7 @@
 # <ESC>"5"                 Stop (Exit) the daemon
 # <ESC>"7"<"weight value"> Set weighting (-50 ... 50)
 # <ESC>"c"<"x">            Tune x seconds long (limit = 10 seconds)
+#                          ON4ACP 191018: not really: <ESC>"c" toggles tuning on and off. The delay is not used.
 # <ESC>"d"<"delay">        PTT on delay 0..50 (0 .. 50ms)
 # Any message              Send morse code message  (max 1 packet!)
 # qrz de pa0rct ++test--   In- and decrease speed on the fly in 4 wpm steps

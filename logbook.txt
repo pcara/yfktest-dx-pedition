@@ -15,8 +15,13 @@
 # * In the orig-latest, I get Subroutine main::getchar redefined at subs/dxcc.pl 
 #   line 2. Maybe have a look at this? This error has disappeared but I don't 
 #   know why.
-# * How about adding Alt-t to tune radio for 6 seconds (or less with ESC) (or until you press any key)?
-#   winkeyerdeamon has the command built in. Just send c with the number of seconds...
+# * DONE: not for 6 seconds but until you press ALT-T again or ESC or ~/` or 
+#   ALT-x. How about adding Alt-t to tune radio for 6 seconds (or less with ESC) 
+#   (or until you press any key)? 
+#   winkeyerdeamon has the command built in. Just send c with the number of 
+#   seconds... NO the number of seconds is not honoured... C toggles tuning mode 
+#   of the keyer. If you interrupt the keryer with '4', the tuning mode stays 
+#   and sending 'c' will not tune but rather toggle the tune mode to off.
 # * When starting yfktest reads the log and gives the red-background "status 
 #   bar", then draws the logging window. The "status bar" stays on the screen. 
 #   Maybe clear screen before drawing logging window?
