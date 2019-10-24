@@ -144,3 +144,275 @@ in on WireShark but the were not picked up by N1MM+. Switching off the
 Firewall on the WAN solved the problem. Very strange but I now realize 
 that Windows might mean "Windows network" (NetBIOS etc.) instead of LAN.
 
+191023 Here is an e-mail I sent to Erik, ON4CCV, about N1MM
+From: Philippe Cara <pcara@vub.ac.be>
+To: "Erik Crabbe" <erik.crabbe@telenet.be>
+Subject: Re: MD/OP2D
+Date: Thu, 5 Sep 2019 21:28:21 +0200
+X-Mailer: Claws Mail 3.8.0 (GTK+ 2.24.10; x86_64-pc-linux-gnu)
+Organization: Vrije Universiteit Brussel
+
+Hallo Erik,
+
+ik vermoed dat je druk bezig bent met de velddag voorbereidingen.
+
+Hoe zijn de tests met N1MM gelukt?
+
+Ik kan nu zonder probleem de QSOs die ik log ook real-time in N1MM
+laten verschijnen. Als ik morgen even Samantha's computer mag gebruiken
+stuur ik jou een demo.
+
+Uiteindelijk is de oplossing heel simpel maar ik heb heel het weekend
+gedacht dat het niet werkte omdat ik dacht dat Windows met "local home
+network" LAN bedoelde. Dat blijkt niet zo te zijn (ze bedoelen hiermee
+\\WORKGROUP denk ik). De WAN firewall hield dus mijn QSOs de hele tijd
+tegen (hoewel ik ze kon zien aankomen op de computer).
+
+VRAAG 1: ik neem aan dat het netwerk ginds IP adressen gaat toekennen
+via DHCP. Correct? Of werk je met vaste adressen?
+
+Het systeem dat ik gebruik gaat niet via poort 12060. Dat is een poort
+waarop N1MM zelf QSOs verzendt (in een eigen XML formaat via UDP). N1MM
+luistert niet standaard op deze poort (heb ik ontdekt). Ik vermoed dat
+hij enkel luistert als hij eerst met een andere kopij van N1MM kan
+communiceren op 12070. Het juiste formaat hiervan ken ik niet want
+wordt geheim gehouden en ik heb geen twee windows computers om te
+kijken hoe ze interageren. Ik zie wel dat N1MM om de 20 seconden een
+UDP pakket stuurt op 12070.
+
+Wat wel werkt is poort 2333 die in N1MM ingebouwd is om juist QSO
+informatie uit andere programma's te krijgen, in ADIF. Dat was met twee
+lijnen in het programma geklonken (maar de firewall...).
+
+De documentatie geeft enkel een voorbeeld om een QSO naar de log te
+sturen, met "<COMMAND:3>Log". Ik vermoed dat er ook een mogelijkheid is
+om een QSO te deleten of te corrigeren maar wegens documentatie- en
+tijdgebrek om het zelf te achterhalen zal dit voor een volgende versie
+zijn. Ik denk niet dat wij heel veel fouten corrigeren tijdens de
+DXpeditie. De enige die ik mij herinner is ON6MAB -> ON6QB ;-) En we
+kunnen altijd correcties maken in N1MM zelf.
+
+VRAAG 2: Wat denk jij?
+
+VRAAG 3: Hoe zit het met de integratie van WSJT-X (voor FT8) in N1MM+.
+De oude manier om dat te doen gaat namelijk ook via poort 2333. Ik
+weet niet of je in N1MM twee adressen kan instellen waar N1MM naar
+luistert voor QSOs maar ik vermoed van wel. Dan zet je gewoon 127.0.0.1
+en <IP-CW-STATION>. Anders moeten we op sommige momenten
+herconfigureren. De modernere manier om WSJT-X te doen is poort 2237.
+Dan zijn er geen poortconflicten maar mijn korte tijd op de N1MM
+mailing list toont dat dat allemaal niet vanzelf gaat... (het is een
+zeer drukke mailing list. N1MM is zo complex dat er veel hulp nodig is
+om de doorsnee amateur te laten genieten van "the best contest logger
+ever made").
+
+VRAAG 4: zal ik ook stellen aan Martin. Als ik QSOs injecteer in de
+master N1MM, die ook in gebruik is als log van een van onze stations,
+weet ik niet goed wat QSO Director gaat doen. Ik herinner mij dat we
+moesten zeggen welke stations (via NetBIOS naam) door N1MM moesten
+gevolgd worden. Ik heb natuurlijk geen NetBIOS naam omdat ik geen
+Windows heb. Ik kan ook geen stationsnaam sturen in ADIF (tenzij het
+wel kan maar niet gedocumenteerd is). Dus denk ik dat mijn QSOs zullen
+gelogd worden onder de NetBIOS naam van de master computer (MARNIK-PC).
+Ik heb daar geen enkel probleem mee maar QSO Director zou wel eens rare
+resultaten kunnen geven, waarbij op de website de roepnaam van de
+operator, de mode en de band op MARNIK-PC om de 5 seconden verspringt
+(naargelang een QSO wordt gemaakt in CW of op het station van
+MARNIK-PC). Op zich zeker niet hinderlijk maar kan verwarrend zijn voor
+bezoekers voor de website. Ik zal Martin vragen of wij hem eventueel
+via een ander ADIF veld (zoals <COMMENT:>) kunnen laten weten van welk
+station een QSO komt.
+
+Tijdens mijn experimenten kwam ik tot de vaststelling dat N1MM heel
+veel niet-gedocumenteerde dingen doet op het netwerk. Als ik eens twee
+windows computers te pakken krijg, zal ik hun systeem wel eens
+reverse-engineeren en een nog betere oplossing maken.
+
+Beste 73 en fijne avond,
+
+Philippe
+
+On 190905 at 15:25, Erik Crabbe wrote:
+> baja , we moeten ambitieus zijn, nietwaar ;-)
+> 
+> oei, waarom heb je commentaar gekregen van N1MM?   
+> 
+> cu ! - 73
+> erik 
+> 
+> -----Original Message-----
+> From: Philippe Cara 
+> Sent: Thursday, September 5, 2019 11:40
+> To: ON4ANN <on4ann@gmail.com>
+> Cc: Erik Crabbe <erik.crabbe@telenet.be>; ON5CD@telenet.be;
+> walter.croes@telenet.be; rudi.carael@gmail.com; on4dcu@gmail.com;
+> mertens_luc@telenet.be; Etienne <etienne.vandenbroeck@telenet.be>;
+> cedric@baelemans.com; on4dto@hotmail.com Subject: Re: MD/OP2D
+> 
+> On 190904 at 21:19, ON4ANN wrote:  
+> > Nu de poll : voor hoeveel qso’s gaan we ?  
+> 
+> Toen we QSO Director aan het configureren waren zei Erik: 50000 ;-)
+> Per dag...
+> 
+> 73,
+> 
+> Philippe
+> 
+> PS: netwerk logging tussen mijn laptop en N1MM+ is bijna in orde,
+> ondanks de niet heel sympathieke commentaren van N1MM himself;-)
+>   
+
+191024 Erik's answer:
+
+From: "Erik Crabbe" <erik.crabbe@telenet.be>
+To: "'Philippe Cara'" <pcara@vub.ac.be>
+Subject: RE: MD/OP2D
+Date: Thu, 5 Sep 2019 23:20:46 +0200
+X-Mailer: Microsoft Outlook 16.0
+
+hoi Philippe
+
+antwoorden hieronder
+
+ 
+
+73!
+
+erik
+
+ 
+
+-----Original Message-----
+From: Philippe Cara 
+Sent: Thursday, September 5, 2019 21:28
+To: Erik Crabbe <erik.crabbe@telenet.be>
+Subject: Re: MD/OP2D
+
+ 
+
+Hallo Erik,
+
+ 
+
+ik vermoed dat je druk bezig bent met de velddag voorbereidingen.
+
+ 
+
+Hoe zijn de tests met N1MM gelukt? Deze week nog niet aan toe gekomen - zal voor 
+volgende week zijn (na de velddag)
+
+ 
+
+Ik kan nu zonder probleem de QSOs die ik log ook real-time in N1MM laten 
+verschijnen. Als ik morgen even Samantha's computer mag gebruiken stuur ik jou 
+een demo.
+
+ 
+
+Uiteindelijk is de oplossing heel simpel maar ik heb heel het weekend gedacht 
+dat het niet werkte omdat ik dacht dat Windows met "local home network" LAN 
+bedoelde. Dat blijkt niet zo te zijn (ze bedoelen hiermee  <file://WORKGROUP> 
+\\WORKGROUP denk ik). De WAN firewall hield dus mijn QSOs de hele tijd tegen 
+(hoewel ik ze kon zien aankomen op de computer).
+
+ 
+
+VRAAG 1: ik neem aan dat het netwerk ginds IP adressen gaat toekennen via DHCP. 
+Correct? Of werk je met vaste adressen?  IP toekenning zal idd via DHCP gaan, 
+static adressen mag, maar hoeft niet (N1MM kan dat aan). Enige voorwaarde: alle 
+log stations moeten in hetzelfde subnet zitten
+
+ 
+
+Het systeem dat ik gebruik gaat niet via poort 12060. Dat is een poort waarop 
+N1MM zelf QSOs verzendt (in een eigen XML formaat via UDP). N1MM luistert niet 
+standaard op deze poort (heb ik ontdekt). Ik vermoed dat hij enkel luistert als 
+hij eerst met een andere kopij van N1MM kan communiceren op 12070. Het juiste 
+formaat hiervan ken ik niet want wordt geheim gehouden en ik heb geen twee 
+windows computers om te kijken hoe ze interageren. Ik zie wel dat N1MM om de 20 
+seconden een UDP pakket stuurt op 12070.
+
+ 
+
+Wat wel werkt is poort 2333 die in N1MM ingebouwd is om juist QSO informatie uit 
+andere programma's te krijgen, in ADIF. Dat was met twee lijnen in het programma 
+geklonken (maar de firewall...).
+
+ 
+
+De documentatie geeft enkel een voorbeeld om een QSO naar de log te sturen, met 
+"<COMMAND:3>Log". Ik vermoed dat er ook een mogelijkheid is om een QSO te 
+deleten of te corrigeren maar wegens documentatie- en tijdgebrek om het zelf te 
+achterhalen zal dit voor een volgende versie zijn. Ik denk niet dat wij heel 
+veel fouten corrigeren tijdens de DXpeditie. De enige die ik mij herinner is 
+ON6MAB -> ON6QB ;-) En we kunnen altijd correcties maken in N1MM zelf.
+
+ 
+
+VRAAG 2: Wat denk jij?  Idd als er correcties nodig zijn gaan we dat achteraf in 
+N1MM of in de ADIF log moeten doen (alvorens te uploaden  naar clublog)
+
+ 
+
+VRAAG 3: Hoe zit het met de integratie van WSJT-X (voor FT8) in N1MM+.  die 
+integratie werkt - ik heb het alleszins al werkend gekregen (is al ff geleden) ,  
+zal het nog eens testen volgende week; dit zou de instelling moeten zijn in de 
+Settings > Reporting tab van N1MM  (maar dat heb je allicht al lang gevonden :-)  
+Ik heb nog niet geexperimenteerd met een ander port number (2237?). En waar stel 
+je dat dan in op WSJT-X?
+
+
+
+De oude manier om dat te doen gaat namelijk ook via poort 2333. Ik weet niet of 
+je in N1MM twee adressen kan instellen waar N1MM naar luistert voor QSOs maar ik 
+vermoed van wel. Dan zet je gewoon 127.0.0.1 en <IP-CW-STATION>. Anders moeten 
+we op sommige momenten herconfigureren. De modernere manier om WSJT-X te doen is 
+poort 2237.
+
+Dan zijn er geen poortconflicten maar mijn korte tijd op de N1MM mailing list 
+toont dat dat allemaal niet vanzelf gaat... (het is een zeer drukke mailing 
+list. N1MM is zo complex dat er veel hulp nodig is om de doorsnee amateur te 
+laten genieten van "the best contest logger ever made").
+
+ 
+
+VRAAG 4: zal ik ook stellen aan Martin. Als ik QSOs injecteer in de master N1MM, 
+die ook in gebruik is als log van een van onze stations, weet ik niet goed wat 
+QSO Director gaat doen. Ik herinner mij dat we moesten zeggen welke stations 
+(via NetBIOS naam) door N1MM moesten gevolgd worden. Ik heb natuurlijk geen 
+NetBIOS naam omdat ik geen Windows heb. Ik kan ook geen stationsnaam sturen in 
+ADIF (tenzij het wel kan maar niet gedocumenteerd is). Dus denk ik dat mijn QSOs 
+zullen gelogd worden onder de NetBIOS naam van de master computer (MARNIK-PC).
+
+Ik heb daar geen enkel probleem mee maar QSO Director zou wel eens rare 
+resultaten kunnen geven, waarbij op de website de roepnaam van de operator, de 
+mode en de band op MARNIK-PC om de 5 seconden verspringt (naargelang een QSO 
+wordt gemaakt in CW of op het station van MARNIK-PC). Op zich zeker niet 
+hinderlijk maar kan verwarrend zijn voor bezoekers voor de website. Ik zal 
+Martin vragen of wij hem eventueel via een ander ADIF veld (zoals <COMMENT:>) 
+kunnen laten weten van welk station een QSO komt. Dat weet ik ook niet; ik denk 
+dat het de log info van de "geconsolideerde" log op het N1MM Master station is 
+die door QSODirector wordt opgepikt;  de bijkomende info (op name, netbios name, 
+...) van elk netwerk station wordt dan apart doorgestuurd? 
+
+ 
+
+Tijdens mijn experimenten kwam ik tot de vaststelling dat N1MM heel veel 
+niet-gedocumenteerde dingen doet op het netwerk. Als ik eens twee windows 
+computers te pakken krijg, zal ik hun systeem wel eens reverse-engineeren en een 
+nog betere oplossing maken.  Feel free ;-)   we gaan ginder wel wat tijd hebben 
+om daarmee te prullen ...
+
+ 
+
+Beste 73 en fijne avond,
+
+ 
+
+Philippe
+
+191024 After the MD/OP2D expedition I found out (somewhere on internet, can't 
+find it back) that N1MM+ actually has a "network debugging" menu or window 
+somewhere. This should show all N1MM+ traffic. Would have helped a lot to 
+actually understand what N1MM+ all does on the network.
